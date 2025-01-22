@@ -1,22 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
   const soulReadingBtn = document.getElementById("soulReadingBtn");
   const soulCards = document.getElementById("soulCards");
+  const questionReadingBtn = document.getElementById("questionReadingBtn");
+  const questionOptions = document.getElementById("questionOptions");
+  const questionCards = document.getElementById("questionCards");
+  const blessing2025Btn = document.getElementById("blessing2025Btn");
+  const blessingCard = document.getElementById("blessingCard");
+  const blessingCardDisplay = document.getElementById("blessingCardDisplay");
 
-  // 測試牌組 (可以替換成實際圖片)
-  const deck = Array.from({ length: 78 }, (_, i) => ({
-    id: i + 1,
-    front: `牌 ${i + 1}`, // 前面可以改成圖檔路徑
-    back: "背面"
-  }));
+  let soulDeck = [];
+  let usedCards = [];
+  const questionCategories = {};
 
   // 隨機生成牌
-  const generateRandomCards = (count) => {
-    return deck.sort(() => Math.random() - 0.5).slice(0, count);
+  const generateRandomCards = (count, exclude = []) => {
+    const deck = Array.from({ length: 78 }, (_, i) => i + 1); // 模擬 78 張牌
+    return deck.filter(card => !exclude.includes(card)).sort(() => Math.random() - 0.5).slice(0, count);
   };
 
-  // 顯示卡片 (正面和背面)
-  const displayCards = (container, cards) => {
-    container.innerHTML = ""; // 清空區域
+  // 顯示牌（維持每行 3 張）
+  const displayCards = (container, cards, isSoul = false) => {
+    if (isSoul) container.innerHTML = ""; // 清空靈魂解讀區域
     cards.forEach((card) => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
@@ -26,17 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const cardFront = document.createElement("div");
       cardFront.classList.add("card-front");
-      cardFront.textContent = card.front;
+      cardFront.textContent = `牌 ${card}`;
 
       const cardBack = document.createElement("div");
       cardBack.classList.add("card-back");
-      cardBack.textContent = card.back;
+      cardBack.textContent = "背面";
 
       cardInner.appendChild(cardFront);
       cardInner.appendChild(cardBack);
       cardElement.appendChild(cardInner);
 
-      // 翻牌事件
+      // 翻牌效果
       cardElement.addEventListener("click", () => {
         cardElement.classList.toggle("flipped");
       });
@@ -47,7 +51,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 靈魂解讀按鈕點擊事件
   soulReadingBtn.addEventListener("click", () => {
-    const cards = generateRandomCards(3);
-    displayCards(soulCards, cards);
+    soulDeck = generateRandomCards(3);
+    usedCards = [...soulDeck];
+    displayCards(soulCards, soulDeck, true);
+    blessing2025Btn.classList.add("hidden");
+    blessingCard.classList.add("hidden");
+  });
+
+  // 問題解讀按鈕點擊事件
+  questionReadingBtn.addEventListener("click", () => {
+    questionOptions.classList.remove("hidden");
+  });
+
+  // 問題選擇按鈕點擊事件
+  questionOptions.addEventListener("click", (e) => {
+    if (e.target.classList.contains("questionBtn")) {
+      const questionType = e.target.dataset.type;
+
+      // 如果該問題類別區域未建立，則新增
+      if (!questionCategories[questionType]) {
+        const section = document.createElement("section");
+        section.innerHTML = `<h3>${questionType}</h3>`;
+        const cardContainer = document.createElement("div");
+        cardContainer.classList.add("cards");
+        section.appendChild(cardContainer);
+        questionCards.appendChild(section);
+        questionCategories[questionType] = cardContainer;
+      }
+
+      // 抽牌並顯示
+      const cardContainer = questionCategories[questionType];
+      const newCards = generateRandomCards(3, usedCards);
+      usedCards = [...usedCards, ...newCards];
+      displayCards(cardContainer, newCards);
+
+      // 顯示祝福牌按鈕
+      blessing2025Btn.classList.remove("hidden");
+    }
+  });
+
+  // 2025祝福牌按鈕點擊事件
+  blessing2025Btn.addEventListener("click", () => {
+    const blessingCardNumber = generateRandomCards(1, usedCards)[0];
+    blessingCardDisplay.textContent = `祝福牌 ${blessingCardNumber}`;
+    usedCards.push(blessingCardNumber);
+    blessingCard.classList.remove("hidden");
   });
 });
