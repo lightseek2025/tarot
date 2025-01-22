@@ -5,8 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fef8e6; /* 柔和奶黃色背景 */
-  overflow-x: hidden; /* 禁止水平滾動 */
-  color: #5c5c5c; /* 不飽和的灰棕色文字 */
+  color: #5c5c5c; /* 灰棕色文字 */
 }
 
 /* 頂部 Slogan */
@@ -17,23 +16,116 @@ body {
 
 .slogan h1 {
   font-size: 28px;
-  color: #b85c38; /* 柔和的磚紅色標題 */
+  color: #b85c38; /* 磚紅色標題 */
   margin: 0;
 }
 
 .slogan p {
   font-size: 16px;
-  color: #6a994e; /* 深綠色文字，增添生機 */
+  color: #6a994e; /* 深綠色文字 */
   margin: 5px 0;
+}
+
+/* 春聯樣式 */
+.spring-couplet {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spring-couplet .left-couplet,
+.spring-couplet .right-couplet {
+  writing-mode: vertical-rl;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #b23a2b; /* 紅色背景 */
+  padding: 10px;
+  border: 2px solid #8f2c20; /* 深紅色邊框 */
+  border-radius: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 添加陰影 */
+}
+
+/* 靈魂解讀卡片容器 */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 90%;
+  padding: 20px;
+  gap: 10px; /* 卡片之間的間距 */
+}
+
+.fixed-cards {
+  position: sticky;
+  top: 0;
+  background-color: #fef8e6;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 卡片樣式 */
+.card {
+  width: 100px;
+  height: 150px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 卡片陰影 */
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  background-color: #ffffff; /* 白色背景 */
+  border: 2px solid #d4a373; /* 奶茶色邊框 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-back {
+  background-image: url('cards/back.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-color: #b85c38; /* 磚紅色背景 */
+  border: 2px solid #8f2c20; /* 深紅色邊框 */
 }
 
 /* 操作方式區塊 */
 .instruction {
-  background-color: #fef8e6; /* 柔和奶黃色背景 */
+  background-color: #fef8e6;
   padding: 15px;
   margin: 20px auto;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加柔和陰影 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 80%;
   text-align: left;
 }
@@ -46,84 +138,80 @@ body {
   font-weight: bold;
 }
 
-/* 卡片容器樣式 */
-.cards {
+.steps {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   gap: 10px;
-  margin: 20px auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 10px;
-  max-width: 90%;
+  background-color: #f4d3b2; /* 奶茶色背景 */
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 單個卡片樣式 */
-.card {
-  width: 100px;
-  height: 150px;
-  perspective: 1000px; /* 保留翻牌效果 */
-}
-
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-}
-
-.card.flipped .card-inner {
-  transform: rotateY(180deg); /* 翻牌動畫 */
-}
-
-.card-front,
-.card-back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  border-radius: 5px;
-}
-
-.card-front {
-  transform: rotateY(180deg); /* 翻轉前置面 */
-  background-color: #ffffff;
-  border: 2px solid #d4a373; /* 奶茶色邊框 */
-  display: flex;
+.step-number {
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  font-weight: bold;
-  color: #5c5c5c;
-}
-
-.card-back {
-  background-color: #b85c38; /* 磚紅色背景 */
-  border: 2px solid #8f2c20;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-/* 春聯樣式 */
-.couplets {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.couplets .left-couplet,
-.couplets .right-couplet {
-  writing-mode: vertical-rl;
-  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
-  background-color: #b23a2b;
-  padding: 10px;
-  border: 2px solid #8f2c20;
+  background-color: #b85c38;
+  border-radius: 50%;
+}
+
+/* 按鈕樣式 */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #d4a373; /* 奶茶色背景 */
+  color: white;
+  border: none;
   border-radius: 5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #c48c5a;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .slogan h1 {
+    font-size: 24px;
+  }
+  .slogan p {
+    font-size: 14px;
+  }
+  .card {
+    width: 80px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slogan h1 {
+    font-size: 20px;
+  }
+  .slogan p {
+    font-size: 12px;
+  }
+  .card {
+    width: 70px;
+    height: 105px;
+  }
 }
