@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,17 +14,11 @@
     <p>照亮前行的路，將療癒融入生活。」</p>
   </div>
 
-  <!-- 春聯樣式 -->
-  <div class="spring-couplet">
-    <div class="left-couplet">解惑塔羅療心靈</div>
-    <div class="right-couplet">命運驚喜藏心裡</div>
-  </div>
-
   <!-- 靈魂解讀按鈕 -->
   <button id="soulReadingBtn">靈魂解讀</button>
   <div id="soulCards" class="cards fixed-cards"></div>
 
-  <!-- 操作方式區塊 -->
+  <!-- 操作說明 -->
   <div class="instruction">
     <h2>操作方式</h2>
     <div class="steps">
@@ -57,7 +51,11 @@
   <!-- 2025祝福牌按鈕 -->
   <button id="blessing2025Btn" class="hidden">2025的祝福牌</button>
   <div id="blessingCard" class="hidden">
-    <div id="blessingCardDisplay"></div>
+    <div class="couplets">
+      <div class="left-couplet">解惑塔羅療心靈</div>
+      <div id="blessingCardDisplay"></div>
+      <div class="right-couplet">命運驚喜藏心裡</div>
+    </div>
   </div>
 
   <script src="app.js"></script>
