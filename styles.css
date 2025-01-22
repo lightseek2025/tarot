@@ -33,12 +33,6 @@ button.hidden {
 .cards {
   margin: 20px auto;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.row {
-  display: flex;
   justify-content: center;
   gap: 10px;
 }
