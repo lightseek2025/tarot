@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fef8e6;
+  color: #5c5c5c;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.slogan h1 {
+  color: #b85c38;
+}
+
+.slogan p {
+  color: #6a994e;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.couplets {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.left-couplet, .right-couplet {
+  writing-mode: vertical-rl;
+  background-color: #b23a2b;
+  color: white;
+  padding: 10px;
+  border: 2px solid #8f2c20;
+  border-radius: 5px;
+}
+
+.card {
+  width: 100px;
+  height: 150px;
+}
