@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>尋光屋 - 線上塔羅解讀</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>尋光屋</h1>
+    <p class="slogan">探索靈魂的答案，尋找屬於你的光</p>
+    <p class="instruction">請點擊按鈕進行塔羅牌解讀</p>
+  </header>
+
+  <main>
+    <!-- 靈魂解讀按鈕 -->
+    <button id="soulReadingBtn">靈魂解讀</button>
+    <div id="soulCards" class="cards"></div>
+
+    <!-- 操作說明 -->
+    <section>
+      <h2>操作說明</h2>
+      <p>點擊「靈魂解讀」按鈕會隨機抽出三張塔羅牌；再選擇其他問題時，會與靈魂解讀的牌做對照。</p>
+    </section>
+
+    <!-- 問題解讀按鈕 -->
+    <button id="questionReadingBtn">問題解讀</button>
+    <div id="questionOptions" class="hidden">
+      <button class="questionBtn" data-type="感情">感情</button>
+      <button class="questionBtn" data-type="人際關係">人際關係</button>
+      <button class="questionBtn" data-type="事業">事業</button>
+      <button class="questionBtn" data-type="學業">學業</button>
+      <button class="questionBtn" data-type="財運">財運</button>
+    </div>
+    <div id="questionCards" class="cards"></div>
+
+    <!-- 2025祝福牌按鈕 -->
+    <button id="blessing2025Btn" class="hidden">2025的祝福牌</button>
+    <div id="blessingCard" class="hidden">
+      <div class="couplets">
+        <span>左側春聯</span>
+        <span>右側春聯</span>
+      </div>
+      <div id="blessingCardDisplay"></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
