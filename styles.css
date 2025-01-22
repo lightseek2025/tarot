@@ -1,109 +1,129 @@
-/* 整體風格 */
+/* 全局樣式 */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #fef9e7; /* 柔和的米黃色背景 */
-  color: #2b2b2b; /* 深灰文字 */
   margin: 0;
   padding: 0;
+  background-color: #fef8e6; /* 柔和奶黃色背景 */
+  overflow-x: hidden; /* 禁止水平滾動 */
+  color: #5c5c5c; /* 不飽和的灰棕色文字 */
 }
 
-header {
-  background-color: #b71c1c; /* 深紅色背景 */
-  color: #fdd835; /* 金黃色文字 */
-  padding: 20px;
+/* 頂部 Slogan */
+.slogan {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.slogan, .instruction {
+.slogan h1 {
+  font-size: 28px;
+  color: #b85c38; /* 柔和的磚紅色標題 */
+  margin: 0;
+}
+
+.slogan p {
+  font-size: 16px;
+  color: #6a994e; /* 深綠色文字，增添生機 */
   margin: 5px 0;
 }
 
-/* 按鈕設計 */
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #43a047; /* 綠色按鈕背景 */
-  color: #fff; /* 白色文字 */
-  border: 2px solid #43a047;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-  background-color: #388e3c; /* 深綠色背景 */
-  color: #ffd600; /* 黃色文字 */
-}
-
-/* 隱藏的按鈕 */
-button.hidden {
-  display: none;
-}
-
-/* 卡片區域 */
-.cards {
+/* 操作方式區塊 */
+.instruction {
+  background-color: #fef8e6; /* 柔和奶黃色背景 */
+  padding: 15px;
   margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加柔和陰影 */
+  max-width: 80%;
+  text-align: left;
 }
 
-.row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.card {
-  width: 100px;
-  height: 150px;
-  background-color: #d32f2f; /* 紅色背面 */
-  color: #ffd600; /* 黃色正面 */
-  border: 2px solid #d32f2f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.card.flipped {
-  background-color: #43a047; /* 翻轉後的綠色背景 */
-  color: #ffffff; /* 白色文字 */
-  transform: rotateY(180deg);
-}
-
-/* 春聯設計 */
-.couplets {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-  color: #ffffff; /* 白色文字 */
+.instruction h2 {
+  font-size: 20px;
+  color: #b85c38;
+  text-align: center;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
-.couplets span {
-  background-color: #b71c1c; /* 深紅色春聯背景 */
+/* 卡片容器樣式 */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
   padding: 10px;
-  border: 2px solid #ffd600; /* 金黃色邊框 */
+  max-width: 90%;
+}
+
+/* 單個卡片樣式 */
+.card {
+  width: 100px;
+  height: 150px;
+  perspective: 1000px; /* 保留翻牌效果 */
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg); /* 翻牌動畫 */
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
   border-radius: 5px;
 }
 
-/* 祝福牌 */
-#blessingCardDisplay {
-  width: 150px;
-  height: 200px;
-  background-color: #ffd600; /* 金黃色背景 */
-  color: #b71c1c; /* 深紅色文字 */
-  border: 3px solid #b71c1c; /* 紅色邊框 */
+.card-front {
+  transform: rotateY(180deg); /* 翻轉前置面 */
+  background-color: #ffffff;
+  border: 2px solid #d4a373; /* 奶茶色邊框 */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  margin: 20px auto;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5c5c5c;
 }
 
-.hidden {
-  display: none;
+.card-back {
+  background-color: #b85c38; /* 磚紅色背景 */
+  border: 2px solid #8f2c20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 春聯樣式 */
+.couplets {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.couplets .left-couplet,
+.couplets .right-couplet {
+  writing-mode: vertical-rl;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #b23a2b;
+  padding: 10px;
+  border: 2px solid #8f2c20;
+  border-radius: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
