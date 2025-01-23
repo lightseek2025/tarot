@@ -22,7 +22,25 @@ document.addEventListener("DOMContentLoaded", () => {
     cards.forEach(card => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
-      cardElement.textContent = `牌 ${card}`;
+
+      const cardInner = document.createElement("div");
+      cardInner.classList.add("card-inner");
+
+      const cardFront = document.createElement("div");
+      cardFront.classList.add("card-front");
+      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}">`;
+
+      const cardBack = document.createElement("div");
+      cardBack.classList.add("card-back");
+
+      cardInner.appendChild(cardFront);
+      cardInner.appendChild(cardBack);
+      cardElement.appendChild(cardInner);
+
+      cardElement.addEventListener("click", () => {
+        cardElement.classList.toggle("flipped");
+      });
+
       container.appendChild(cardElement);
     });
   };
@@ -64,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   blessing2025Btn.addEventListener("click", () => {
     const blessingCardNumber = generateRandomCards(1, usedCards)[0];
-    blessingCardDisplay.textContent = `祝福牌 ${blessingCardNumber}`;
+    blessingCardDisplay.innerHTML = `<img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card">`;
     blessingCard.classList.remove("hidden");
   });
 });
