@@ -10,13 +10,13 @@ body {
 
 /* Slogan 樣式 */
 .slogan h1 {
-  font-size: 32px;
+  font-size: 28px;
   color: #b85c38;
   margin: 20px 0;
 }
 
 .slogan p {
-  font-size: 16px;
+  font-size: 14px;
   color: #6a994e;
   margin: 5px 0;
 }
@@ -26,7 +26,7 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
   margin: 20px auto;
 }
 
@@ -40,8 +40,8 @@ body {
 
 /* 卡片樣式 */
 .card {
-  width: 150px;
-  height: 278px; /* 保持 345x640 比例 */
+  width: 100px;
+  height: 186px; /* 維持345x640比例，縮小 */
   position: relative;
   perspective: 1000px;
 }
@@ -77,61 +77,11 @@ body {
   background-position: center;
 }
 
-/* 操作說明樣式 */
-.instruction {
-  margin: 30px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  max-width: 600px;
-  text-align: left;
-}
-
-.instruction h2 {
-  font-size: 22px;
-  color: #b85c38;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.step {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: #f9f3e7;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.step-number {
-  width: 40px;
-  height: 40px;
-  background: #b85c38;
-  color: white;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
-
-.step p {
-  margin: 0;
-  font-size: 14px;
-}
-
 /* 按鈕樣式 */
 button {
-  padding: 12px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
+  margin: 10px 10px;
+  font-size: 14px;
   border: none;
   border-radius: 5px;
   background-color: #d4a373;
@@ -144,12 +94,19 @@ button:hover {
   background-color: #b85c38;
 }
 
+/* 分隔線 */
+.separator {
+  height: 2px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
 /* 春聯樣式 */
 .couplets {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .left-couplet,
@@ -160,5 +117,5 @@ button:hover {
   padding: 10px;
   border: 2px solid #8f2c20;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 16px;
 }
