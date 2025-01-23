@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const cardFront = document.createElement("div");
       cardFront.classList.add("card-front");
-      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}">`;
+      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}" style="width: 100%; height: 100%; object-fit: cover;">`;
 
       const cardBack = document.createElement("div");
       cardBack.classList.add("card-back");
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   blessing2025Btn.addEventListener("click", () => {
     const blessingCardNumber = generateRandomCards(1, usedCards)[0];
-    blessingCardDisplay.innerHTML = `<img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card">`;
+    blessingCardDisplay.innerHTML = `<img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card" style="width: 100%; height: 100%; object-fit: cover;">`;
     blessingCard.classList.remove("hidden");
   });
 });
