@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!questionCategories[questionType]) {
         const section = document.createElement("section");
-        section.innerHTML = `<h3>${questionType}</h3>`;
+        section.innerHTML = `<h3>${questionType}</h3><div class="separator"></div>`;
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("cards");
         section.appendChild(cardContainer);
