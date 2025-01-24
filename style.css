@@ -91,8 +91,9 @@ body {
 }
 
 .card {
-  width: calc(33.33% - 20px);
+  width: calc(33.33% - 20px); /* 保持一行三張 */
   aspect-ratio: 345 / 640;
+  max-width: 200px;
   border-radius: 8px;
   overflow: hidden;
   perspective: 1000px;
@@ -153,4 +154,49 @@ body {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  .card {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 120px;
+  }
+
+  .styled-btn {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .slogan h1 {
+    font-size: 22px;
+  }
+
+  .slogan p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 100px;
+  }
+
+  .styled-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .slogan h1 {
+    font-size: 18px;
+  }
+
+  .slogan p {
+    font-size: 10px;
+  }
 }
