@@ -15,39 +15,40 @@
   </div>
 
   <!-- 靈魂解讀 -->
-  <div id="soulContainer" class="fixed-top">
+  <div id="soulContainer">
     <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
     <div id="soulCards" class="cards"></div>
   </div>
 
-  <!-- 滾動內容 -->
-  <div id="content">
-    <!-- 操作說明 -->
-    <div class="instruction">
-      <h2>操作方式</h2>
-      <ol>
-        <li>按下「靈魂解讀」抽取三張牌，固定在頂部。</li>
-        <li>按下「問題解讀」，選擇您要深入解讀的領域。</li>
-        <li>點擊翻轉每一張牌，探索塔羅的秘密與啟示。</li>
-      </ol>
-    </div>
+  <!-- 操作說明 -->
+  <div class="instruction">
+    <h2>操作方式</h2>
+    <ol>
+      <li>按下「靈魂解讀」，抽取3張牌，固定在頂部。</li>
+      <li>按下「問題解讀」，選擇深入解讀的領域。</li>
+      <li>點擊翻轉牌面，探索塔羅的秘密與啟示。</li>
+    </ol>
+  </div>
 
-    <!-- 問題解讀 -->
-    <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
+  <!-- 問題解讀 -->
+  <div id="questionSection">
+    <button id="questionReadingBtn" class="styled-btn hidden">問題解讀</button>
     <div id="questionOptions" class="hidden">
       <div class="button-row">
-        <button class="styled-btn red-btn questionBtn hidden" data-type="感情">感情</button>
-        <button class="styled-btn red-btn questionBtn hidden" data-type="人際關係">人際關係</button>
+        <button class="styled-btn red-btn questionBtn" data-type="感情">感情</button>
+        <button class="styled-btn red-btn questionBtn" data-type="人際關係">人際關係</button>
       </div>
       <div class="button-row">
-        <button class="styled-btn yellow-btn questionBtn hidden" data-type="學業">學業</button>
-        <button class="styled-btn yellow-btn questionBtn hidden" data-type="事業">事業</button>
-        <button class="styled-btn yellow-btn questionBtn hidden" data-type="財運">財運</button>
+        <button class="styled-btn yellow-btn questionBtn" data-type="學業">學業</button>
+        <button class="styled-btn yellow-btn questionBtn" data-type="事業">事業</button>
+        <button class="styled-btn yellow-btn questionBtn" data-type="財運">財運</button>
       </div>
     </div>
     <div id="questionCards"></div>
+  </div>
 
-    <!-- 2025祝福牌 -->
+  <!-- 2025祝福牌 -->
+  <div id="blessingSection">
     <button id="blessing2025Btn" class="styled-btn hidden">2025的祝福牌</button>
     <div id="blessingCard" class="hidden">
       <div class="couplets">
