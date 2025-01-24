@@ -3,48 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>尋光屋 - 線上塔羅牌解讀</title>
+  <title>塔羅牌翻牌測試</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 頂部 Slogan -->
-  <div class="slogan">
-    <h1>尋光屋</h1>
-    <p>「用溫暖的陪伴，陪你尋找內心的光，</p>
-    <p>照亮前行的路，將療癒融入生活。」</p>
-  </div>
-
-  <!-- 靈魂解讀 -->
-  <div id="soulContainer">
-    <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
-    <div id="soulCards" class="cards"></div>
-  </div>
-
-  <!-- 操作說明 -->
-  <div class="instruction">
-    <h2>操作方式</h2>
-    <ol>
-      <li>按下「靈魂解讀」，抽取3張牌，固定在頂部。</li>
-      <li>按下「問題解讀」，選擇深入解讀的領域。</li>
-      <li>點擊翻轉牌面，探索塔羅的秘密與啟示。</li>
-    </ol>
-  </div>
-
-  <!-- 問題解讀 -->
-  <div id="questionSection">
-    <button id="questionReadingBtn" class="styled-btn hidden">問題解讀</button>
-    <div id="questionOptions" class="hidden">
-      <div class="button-row">
-        <button class="styled-btn red-btn questionBtn" data-type="感情">感情</button>
-        <button class="styled-btn red-btn questionBtn" data-type="人際關係">人際關係</button>
-        <button class="styled-btn yellow-btn questionBtn" data-type="學業">學業</button>
-        <button class="styled-btn yellow-btn questionBtn" data-type="事業">事業</button>
-        <button class="styled-btn yellow-btn questionBtn" data-type="財運">財運</button>
+  <div class="cards-container">
+    <!-- 卡片區域 -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="cards/1.jpeg" alt="Card 1">
+          </div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="cards/2.jpeg" alt="Card 2">
+          </div>
+          <div class="card-back"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="cards/3.jpeg" alt="Card 3">
+          </div>
+          <div class="card-back"></div>
+        </div>
       </div>
     </div>
-    <div id="questionCards"></div>
   </div>
-
   <script src="app.js" defer></script>
 </body>
 </html>
