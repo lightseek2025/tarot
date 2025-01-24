@@ -5,6 +5,7 @@ body {
   padding: 0;
   background: linear-gradient(135deg, #fef8e6, #ffe4b5);
   color: #5c5c5c;
+  overflow-x: hidden; /* 禁止水平滾動 */
 }
 
 /* Slogan 樣式 */
@@ -20,29 +21,42 @@ body {
   margin: 5px 0;
 }
 
-/* 靈魂解讀容器 */
-#soulContainer {
-  position: sticky;
+/* 靈魂解讀部分（固定在上層） */
+.fixed-top-layer {
+  position: fixed;
   top: 0;
-  background: rgba(255, 248, 230, 0.9);
-  padding: 10px;
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 248, 230, 0.95); /* 半透明背景 */
+  padding: 10px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+}
+
+#soulCards {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+/* 滾動內容部分 */
+#scrollableContent {
+  position: relative;
+  margin-top: 150px; /* 預留固定內容的高度 */
+  padding: 20px;
 }
 
 /* 卡片容器 */
 .cards {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
-  margin: 20px auto;
 }
 
-/* 卡片樣式 */
 .card {
   width: 100px;
-  height: 186px; /* 縮小比例 */
+  height: 186px; /* 維持比例縮小 */
   position: relative;
   perspective: 1000px;
 }
@@ -76,6 +90,15 @@ body {
   background-image: url('cards/back.jpeg');
   background-size: cover;
   background-position: center;
+}
+
+/* 操作說明樣式 */
+.instruction {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 /* 按鈕樣式 */
