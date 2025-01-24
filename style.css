@@ -1,4 +1,3 @@
-/* 全局樣式 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -17,10 +16,8 @@ body {
 .slogan p {
   font-size: 14px;
   color: #6a994e;
-  margin: 5px 0;
 }
 
-/* 靈魂解讀 */
 .fixed-top {
   position: sticky;
   top: 0;
@@ -30,13 +27,6 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#soulCards {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* 按鈕 */
 .styled-btn {
   padding: 10px 15px;
   font-size: 14px;
@@ -48,10 +38,6 @@ body {
   margin: 10px 5px;
 }
 
-.styled-btn:hover {
-  background-color: #8f2c20;
-}
-
 .red-btn {
   background-color: #e53935;
 }
@@ -60,7 +46,6 @@ body {
   background-color: #fbc02d;
 }
 
-/* 卡片 */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -72,26 +57,41 @@ body {
 .card {
   width: calc(33.33% - 20px);
   aspect-ratio: 345/640;
+  background: url('cards/back.jpeg') center/cover no-repeat;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
+  cursor: pointer;
 }
 
-/* 春聯 */
+.card img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card.flipped {
+  background: none;
+}
+
+.card.flipped img {
+  display: block;
+}
+
 .couplets {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
   margin: 20px auto;
 }
 
 .left-couplet,
 .right-couplet {
   writing-mode: vertical-rl;
-  font-size: 16px;
-  color: white;
   background-color: #e53935;
+  color: white;
   padding: 10px;
   border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
 }
