@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   soulReadingBtn.addEventListener("click", () => {
-    soulCards.innerHTML = ""; // 清空灵魂解读区
     const cards = generateRandomCards(3);
     usedCards = [...usedCards, ...cards];
     displayCards(soulCards, cards);
@@ -55,25 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   questionReadingBtn.addEventListener("click", () => {
     questionOptions.classList.remove("hidden");
+    document.querySelectorAll(".questionBtn").forEach((btn) => btn.classList.remove("hidden"));
   });
 
   questionOptions.addEventListener("click", (e) => {
     if (e.target.classList.contains("questionBtn")) {
-      const currentUsedCards = [...usedCards];
-      const newCards = generateRandomCards(3, currentUsedCards);
+      const newCards = generateRandomCards(3, usedCards);
       usedCards = [...usedCards, ...newCards];
-
       const container = document.createElement("div");
       container.classList.add("cards");
       displayCards(container, newCards);
-
-      const separator = document.createElement("div");
-      separator.style.borderTop = "1px solid #b85c38";
-      separator.style.margin = "20px 0";
-
       questionCards.appendChild(container);
-      questionCards.appendChild(separator);
-
       blessing2025Btn.classList.remove("hidden");
     }
   });
@@ -81,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   blessing2025Btn.addEventListener("click", () => {
     const blessingCardNumber = generateRandomCards(1, usedCards)[0];
     usedCards.push(blessingCardNumber);
-
     blessingCardDisplay.innerHTML = `
       <div class="card-inner flipped">
         <div class="card-front">
@@ -92,4 +82,3 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     blessingCard.classList.remove("hidden");
   });
-});
