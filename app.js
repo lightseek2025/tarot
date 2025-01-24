@@ -11,19 +11,30 @@ document.addEventListener("DOMContentLoaded", () => {
   let usedCards = [];
   const generateRandomCards = (count, exclude = []) => {
     const allCards = Array.from({ length: 78 }, (_, i) => i + 1);
-    return allCards.filter((card) => !exclude.includes(card)).slice(0, count);
+    return allCards.filter((card) => !exclude.includes(card)).sort(() => Math.random() - 0.5).slice(0, count);
   };
 
   const createCardElement = (cardNumber) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    const cardInner = document.createElement("div");
+    cardInner.classList.add("card-inner");
+
+    const cardFront = document.createElement("div");
+    cardFront.classList.add("card-front");
+    cardFront.innerHTML = `<img src="cards/${cardNumber}.jpeg" alt="Card ${cardNumber}">`;
+
+    const cardBack = document.createElement("div");
+    cardBack.classList.add("card-back");
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
+
     card.addEventListener("click", () => {
-      card.classList.add("flipped");
-      const img = document.createElement("img");
-      img.src = `cards/${cardNumber}.jpeg`;
-      img.alt = `Card ${cardNumber}`;
-      card.appendChild(img);
+      cardInner.classList.toggle("flipped");
     });
+
     return card;
   };
 
@@ -49,19 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.classList.contains("questionBtn")) {
       const questionType = e.target.dataset.type;
 
-      // 获取已使用牌（灵魂解读+当前问题领域）
       const currentUsedCards = [...usedCards];
-
-      // 抽取3张新牌
       const newCards = generateRandomCards(3, currentUsedCards);
       usedCards = [...usedCards, ...newCards];
 
-      // 显示新牌
       const container = document.createElement("div");
       container.classList.add("cards");
       displayCards(container, newCards);
 
-      // 添加分隔线
       const separator = document.createElement("div");
       separator.classList.add("separator");
       separator.style.borderTop = "1px solid #b85c38";
@@ -70,18 +76,21 @@ document.addEventListener("DOMContentLoaded", () => {
       questionCards.appendChild(container);
       questionCards.appendChild(separator);
 
-      // 显示祝福牌按钮
       blessing2025Btn.classList.remove("hidden");
     }
   });
 
   blessing2025Btn.addEventListener("click", () => {
-    // 抽取1张祝福牌
     const blessingCardNumber = generateRandomCards(1, usedCards)[0];
     usedCards.push(blessingCardNumber);
 
     blessingCardDisplay.innerHTML = `
-      <img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card" style="width: 100%; height: 100%; object-fit: cover;">
+      <div class="card-inner flipped">
+        <div class="card-front">
+          <img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card">
+        </div>
+        <div class="card-back"></div>
+      </div>
     `;
     blessingCard.classList.remove("hidden");
   });
