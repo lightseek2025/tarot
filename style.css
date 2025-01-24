@@ -28,6 +28,10 @@ body {
   margin: 10px;
 }
 
+.hidden {
+  display: none;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
