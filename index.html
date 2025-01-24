@@ -14,9 +14,11 @@
     <p>照亮前行的路，將療癒融入生活。」</p>
   </div>
 
-  <!-- 靈魂解讀按鈕 -->
-  <button id="soulReadingBtn">靈魂解讀</button>
-  <div id="soulCards" class="cards fixed-cards"></div>
+  <!-- 靈魂解讀牌（置頂） -->
+  <div id="soulContainer" class="sticky-container">
+    <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
+    <div id="soulCards" class="cards"></div>
+  </div>
 
   <!-- 操作說明 -->
   <div class="instruction">
@@ -38,24 +40,16 @@
   </div>
 
   <!-- 問題解讀按鈕 -->
-  <button id="questionReadingBtn">問題解讀</button>
-  <div id="questionOptions" class="hidden">
-    <button class="questionBtn" data-type="感情">感情</button>
-    <button class="questionBtn" data-type="人際關係">人際關係</button>
-    <button class="questionBtn" data-type="事業">事業</button>
-    <button class="questionBtn" data-type="學業">學業</button>
-    <button class="questionBtn" data-type="財運">財運</button>
-  </div>
-  <div id="questionCards"></div>
-
-  <!-- 2025祝福牌按鈕 -->
-  <button id="blessing2025Btn" class="hidden">2025的祝福牌</button>
-  <div id="blessingCard" class="hidden">
-    <div class="couplets">
-      <div class="left-couplet">解惑塔羅療心靈</div>
-      <div id="blessingCardDisplay" class="card"></div>
-      <div class="right-couplet">命運驚喜藏心裡</div>
+  <div id="questionSection">
+    <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
+    <div id="questionOptions" class="hidden">
+      <button class="questionBtn" data-type="感情">感情</button>
+      <button class="questionBtn" data-type="人際關係">人際關係</button>
+      <button class="questionBtn" data-type="事業">事業</button>
+      <button class="questionBtn" data-type="學業">學業</button>
+      <button class="questionBtn" data-type="財運">財運</button>
     </div>
+    <div id="questionCards"></div>
   </div>
 
   <script src="app.js"></script>
