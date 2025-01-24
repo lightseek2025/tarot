@@ -18,14 +18,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const displayCards = (container, cards) => {
-    container.innerHTML = '';
     cards.forEach(card => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
-      const img = document.createElement("img");
-      img.src = `cards/${card}.jpeg`;
-      img.alt = `Card ${card}`;
-      cardElement.appendChild(img);
+      const cardInner = document.createElement("div");
+      cardInner.classList.add("card-inner");
+
+      const cardFront = document.createElement("div");
+      cardFront.classList.add("card-front");
+      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}" style="width: 100%; height: 100%; object-fit: cover;">`;
+
+      const cardBack = document.createElement("div");
+      cardBack.classList.add("card-back");
+
+      cardInner.appendChild(cardFront);
+      cardInner.appendChild(cardBack);
+      cardElement.appendChild(cardInner);
+
+      cardElement.addEventListener("click", () => {
+        cardElement.classList.toggle("flipped");
+      });
+
       container.appendChild(cardElement);
     });
   };
@@ -33,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   soulReadingBtn.addEventListener("click", () => {
     soulDeck = generateRandomCards(3);
     usedCards = [...soulDeck];
+    soulCards.innerHTML = '';
     displayCards(soulCards, soulDeck);
   });
 
@@ -50,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("cards");
         section.appendChild(cardContainer);
+        const separator = document.createElement("div");
+        separator.classList.add("separator");
+        section.appendChild(separator);
         questionCards.appendChild(section);
         questionCategories[questionType] = cardContainer;
       }
