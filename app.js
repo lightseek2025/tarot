@@ -22,25 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
     cards.forEach(card => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
-
-      const cardInner = document.createElement("div");
-      cardInner.classList.add("card-inner");
-
-      const cardFront = document.createElement("div");
-      cardFront.classList.add("card-front");
-      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}" style="width: 100%; height: 100%; object-fit: cover;">`;
-
-      const cardBack = document.createElement("div");
-      cardBack.classList.add("card-back");
-
-      cardInner.appendChild(cardFront);
-      cardInner.appendChild(cardBack);
-      cardElement.appendChild(cardInner);
-
-      cardElement.addEventListener("click", () => {
-        cardElement.classList.toggle("flipped");
-      });
-
+      const img = document.createElement("img");
+      img.src = `cards/${card}.jpeg`;
+      img.alt = `Card ${card}`;
+      cardElement.appendChild(img);
       container.appendChild(cardElement);
     });
   };
