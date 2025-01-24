@@ -14,11 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
     return allCards.filter((card) => !usedCards.includes(card)).slice(0, count);
   };
 
+  const createCardElement = (cardNumber) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.addEventListener("click", () => {
+      card.classList.add("flipped");
+      const img = document.createElement("img");
+      img.src = `cards/${cardNumber}.jpeg`;
+      img.alt = `Card ${cardNumber}`;
+      card.appendChild(img);
+    });
+    return card;
+  };
+
   const displayCards = (container, cards) => {
     cards.forEach((card) => {
-      const cardElement = document.createElement("div");
-      cardElement.classList.add("card");
-      cardElement.textContent = `Card ${card}`;
+      const cardElement = createCardElement(card);
       container.appendChild(cardElement);
     });
   };
@@ -34,9 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     questionOptions.classList.remove("hidden");
   });
 
+  questionOptions.addEventListener("click", (e) => {
+    if (e.target.classList.contains("questionBtn")) {
+      const cards = generateRandomCards(3);
+      usedCards.push(...cards);
+      const container = document.createElement("div");
+      container.classList.add("cards");
+      displayCards(container, cards);
+      questionCards.appendChild(container);
+    }
+  });
+
   blessing2025Btn.addEventListener("click", () => {
-    const cards = generateRandomCards(1);
-    blessingCardDisplay.textContent = `Card ${cards[0]}`;
+    const card = generateRandomCards(1)[0];
+    usedCards.push(card);
+    blessingCardDisplay.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}" style="width: 100%; height: 100%; object-fit: cover;">`;
     blessingCard.classList.remove("hidden");
   });
 });
