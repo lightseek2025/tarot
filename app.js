@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return deck.filter(card => !exclude.includes(card)).sort(() => Math.random() - 0.5).slice(0, count);
   };
 
-  const displayCards = (container, cards, isSoul = false) => {
-    if (isSoul) container.innerHTML = "";
+  const displayCards = (container, cards) => {
+    container.innerHTML = '';
     cards.forEach(card => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
@@ -48,9 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   soulReadingBtn.addEventListener("click", () => {
     soulDeck = generateRandomCards(3);
     usedCards = [...soulDeck];
-    displayCards(soulCards, soulDeck, true);
-    blessing2025Btn.classList.add("hidden");
-    blessingCard.classList.add("hidden");
+    displayCards(soulCards, soulDeck);
   });
 
   questionReadingBtn.addEventListener("click", () => {
