@@ -119,3 +119,8 @@ button:hover {
   border-radius: 8px;
   font-size: 16px;
 }
+
+/* 隱藏元素 */
+.hidden {
+  display: none;
+}
