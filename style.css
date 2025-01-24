@@ -5,7 +5,6 @@ body {
   padding: 0;
   background: linear-gradient(135deg, #fef8e6, #ffe4b5);
   color: #5c5c5c;
-  text-align: center;
 }
 
 /* Slogan 樣式 */
@@ -21,6 +20,16 @@ body {
   margin: 5px 0;
 }
 
+/* 靈魂解讀容器 */
+#soulContainer {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 248, 230, 0.9);
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* 卡片容器 */
 .cards {
   display: flex;
@@ -30,18 +39,10 @@ body {
   margin: 20px auto;
 }
 
-.fixed-cards {
-  position: sticky;
-  top: 0;
-  background: rgba(255, 248, 230, 0.9);
-  padding: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* 卡片樣式 */
 .card {
   width: 100px;
-  height: 186px; /* 維持345x640比例，縮小 */
+  height: 186px; /* 縮小比例 */
   position: relative;
   perspective: 1000px;
 }
@@ -92,35 +93,4 @@ button {
 
 button:hover {
   background-color: #b85c38;
-}
-
-/* 分隔線 */
-.separator {
-  height: 2px;
-  background-color: #ccc;
-  margin: 20px 0;
-}
-
-/* 春聯樣式 */
-.couplets {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.left-couplet,
-.right-couplet {
-  writing-mode: vertical-rl;
-  background: #b23a2b;
-  color: white;
-  padding: 10px;
-  border: 2px solid #8f2c20;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-/* 隱藏元素 */
-.hidden {
-  display: none;
 }
