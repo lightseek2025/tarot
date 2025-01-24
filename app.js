@@ -8,46 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const blessingCard = document.getElementById("blessingCard");
   const blessingCardDisplay = document.getElementById("blessingCardDisplay");
 
-  let soulDeck = [];
   let usedCards = [];
-  const questionCategories = {};
-
-  const generateRandomCards = (count, exclude = []) => {
-    const deck = Array.from({ length: 78 }, (_, i) => i + 1);
-    return deck.filter(card => !exclude.includes(card)).sort(() => Math.random() - 0.5).slice(0, count);
+  const generateRandomCards = (count) => {
+    const allCards = Array.from({ length: 78 }, (_, i) => i + 1);
+    return allCards.filter((card) => !usedCards.includes(card)).slice(0, count);
   };
 
   const displayCards = (container, cards) => {
-    cards.forEach(card => {
+    cards.forEach((card) => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
-      const cardInner = document.createElement("div");
-      cardInner.classList.add("card-inner");
-
-      const cardFront = document.createElement("div");
-      cardFront.classList.add("card-front");
-      cardFront.innerHTML = `<img src="cards/${card}.jpeg" alt="Card ${card}" style="width: 100%; height: 100%; object-fit: cover;">`;
-
-      const cardBack = document.createElement("div");
-      cardBack.classList.add("card-back");
-
-      cardInner.appendChild(cardFront);
-      cardInner.appendChild(cardBack);
-      cardElement.appendChild(cardInner);
-
-      cardElement.addEventListener("click", () => {
-        cardElement.classList.toggle("flipped");
-      });
-
+      cardElement.textContent = `Card ${card}`;
       container.appendChild(cardElement);
     });
   };
 
   soulReadingBtn.addEventListener("click", () => {
-    soulDeck = generateRandomCards(3);
-    usedCards = [...soulDeck];
-    soulCards.innerHTML = '';
-    displayCards(soulCards, soulDeck);
+    const cards = generateRandomCards(3);
+    usedCards.push(...cards);
+    displayCards(soulCards, cards);
     questionReadingBtn.classList.remove("hidden");
   });
 
@@ -55,35 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     questionOptions.classList.remove("hidden");
   });
 
-  questionOptions.addEventListener("click", (e) => {
-    if (e.target.classList.contains("questionBtn")) {
-      const questionType = e.target.dataset.type;
-
-      if (!questionCategories[questionType]) {
-        const section = document.createElement("section");
-        section.innerHTML = `<h3>${questionType}</h3>`;
-        const cardContainer = document.createElement("div");
-        cardContainer.classList.add("cards");
-        section.appendChild(cardContainer);
-        const separator = document.createElement("div");
-        separator.classList.add("separator");
-        section.appendChild(separator);
-        questionCards.appendChild(section);
-        questionCategories[questionType] = cardContainer;
-      }
-
-      const cardContainer = questionCategories[questionType];
-      const newCards = generateRandomCards(3, usedCards);
-      usedCards = [...usedCards, ...newCards];
-      displayCards(cardContainer, newCards);
-
-      blessing2025Btn.classList.remove("hidden");
-    }
-  });
-
   blessing2025Btn.addEventListener("click", () => {
-    const blessingCardNumber = generateRandomCards(1, usedCards)[0];
-    blessingCardDisplay.innerHTML = `<img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card" style="width: 100%; height: 100%; object-fit: cover;">`;
+    const cards = generateRandomCards(1);
+    blessingCardDisplay.textContent = `Card ${cards[0]}`;
     blessingCard.classList.remove("hidden");
   });
 });
