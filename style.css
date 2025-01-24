@@ -77,6 +77,13 @@ body {
   background-position: center;
 }
 
+/* 分隔線 */
+.separator {
+  height: 2px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
 /* 隱藏元素 */
 .hidden {
   display: none;
