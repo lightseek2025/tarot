@@ -38,6 +38,28 @@ body {
   padding: 10px 0;
 }
 
+/* 按鈕樣式 */
+.styled-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #b85c38;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.styled-btn:hover {
+  background-color: #8f2c20;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
 /* 卡片容器 */
 .cards {
   display: flex;
@@ -96,39 +118,10 @@ body {
 .left-couplet,
 .right-couplet {
   writing-mode: vertical-rl;
-  background: #b22222; /* 更鮮亮的紅色 */
+  background: #e53935;
   color: white;
   padding: 10px;
-  border: 2px solid #8f2c20;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#blessingCardDisplay {
-  width: 120px;
-  height: 200px;
-  background: #fff;
-  border: 2px solid #b22222;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-  .card {
-    max-width: 90px;
-  }
-
-  .left-couplet,
-  .right-couplet {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  #blessingCardDisplay {
-    width: 100px;
-    height: 180px;
-  }
+  font-weight: bold;
 }
