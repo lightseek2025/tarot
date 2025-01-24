@@ -1,59 +1,63 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #fef8e6, #ffe4b5);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>尋光屋 - 線上塔羅牌解讀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 頂部 Slogan -->
+  <div class="slogan">
+    <h1>尋光屋</h1>
+    <p>「用溫暖的陪伴，陪你尋找內心的光，</p>
+    <p>照亮前行的路，將療癒融入生活。」</p>
+  </div>
 
-.cards {
-  display: flex;
-  gap: 10px;
-}
+  <!-- 靈魂解讀按鈕 -->
+  <button id="soulReadingBtn">靈魂解讀</button>
+  <div id="soulCards" class="cards fixed-cards"></div>
 
-.card {
-  width: 120px;
-  height: 200px;
-  perspective: 1000px; /* 3D翻轉視角 */
-  cursor: pointer;
-}
+  <!-- 操作說明 -->
+  <div class="instruction">
+    <h2>操作方式</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-number">1</span>
+        <p>按下「靈魂解讀」抽取三張牌，固定在頂部。</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <p>按下「問題解讀」，選擇您要深入解讀的領域。</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <p>點擊翻轉每一張牌，探索塔羅的秘密與啟示。</p>
+      </div>
+    </div>
+  </div>
 
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease; /* 翻轉動畫 */
-}
+  <!-- 問題解讀按鈕 -->
+  <button id="questionReadingBtn">問題解讀</button>
+  <div id="questionOptions" class="hidden">
+    <button class="questionBtn" data-type="感情">感情</button>
+    <button class="questionBtn" data-type="人際關係">人際關係</button>
+    <button class="questionBtn" data-type="事業">事業</button>
+    <button class="questionBtn" data-type="學業">學業</button>
+    <button class="questionBtn" data-type="財運">財運</button>
+  </div>
+  <div id="questionCards"></div>
 
-.card.flipped .card-inner {
-  transform: rotateY(180deg); /* 翻轉效果 */
-}
+  <!-- 2025祝福牌按鈕 -->
+  <button id="blessing2025Btn" class="hidden">2025的祝福牌</button>
+  <div id="blessingCard" class="hidden">
+    <div class="couplets">
+      <div class="left-couplet">解惑塔羅療心靈</div>
+      <div id="blessingCardDisplay" class="card"></div>
+      <div class="right-couplet">命運驚喜藏心裡</div>
+    </div>
+  </div>
 
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden; /* 隱藏背面 */
-  border-radius: 8px;
-}
-
-.card-front {
-  background: white;
-}
-
-.card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 確保圖片比例正確 */
-}
-
-.card-back {
-  background: url('./cards/back.jpeg') center/cover no-repeat; /* 背面圖案 */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+  <script src="app.js"></script>
+</body>
+</html>
