@@ -134,3 +134,24 @@ body {
   background: #b85c38;
   margin: 20px auto;
 }
+
+/* 春聯樣式 */
+.couplets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.left-couplet,
+.right-couplet {
+  writing-mode: vertical-rl;
+  background: #e53935;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
