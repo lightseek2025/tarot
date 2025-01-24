@@ -9,55 +9,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const blessingCardDisplay = document.getElementById("blessingCardDisplay");
 
   let usedCards = [];
-  let soulReadingDone = false; // 防止靈魂解讀被多次觸發
+  let soulDone = false;
 
   const generateRandomCards = (count, exclude = []) => {
     const allCards = Array.from({ length: 78 }, (_, i) => i + 1);
-    return allCards
-      .filter((card) => !exclude.includes(card))
-      .sort(() => Math.random() - 0.5)
-      .slice(0, count);
+    return allCards.filter((c) => !exclude.includes(c)).sort(() => Math.random() - 0.5).slice(0, count);
   };
 
-  const createCardElement = (cardNumber) => {
+  const createCard = (cardNumber) => {
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.className = "card";
     const cardInner = document.createElement("div");
-    cardInner.classList.add("card-inner");
+    cardInner.className = "card-inner";
 
-    const cardFront = document.createElement("div");
-    cardFront.classList.add("card-front");
-    cardFront.innerHTML = `<img src="cards/${cardNumber}.jpeg" alt="Card ${cardNumber}">`;
+    const front = document.createElement("div");
+    front.className = "card-front";
+    front.innerHTML = `<img src="cards/${cardNumber}.jpeg">`;
 
-    const cardBack = document.createElement("div");
-    cardBack.classList.add("card-back");
+    const back = document.createElement("div");
+    back.className = "card-back";
 
-    cardInner.appendChild(cardFront);
-    cardInner.appendChild(cardBack);
-    card.appendChild(cardInner);
+    cardInner.append(back, front);
+    card.append(cardInner);
 
-    card.addEventListener("click", () => {
-      cardInner.classList.toggle("flipped");
-    });
-
+    card.addEventListener("click", () => card.classList.toggle("flipped"));
     return card;
   };
 
   soulReadingBtn.addEventListener("click", () => {
-    if (soulReadingDone) return; // 如果已經抽取過，阻止再次觸發
+    if (soulDone) return;
     const cards = generateRandomCards(3);
-    usedCards = [...usedCards, ...cards];
-    displayCards(soulCards, cards);
+    usedCards.push(...cards);
+    cards.forEach((num) => soulCards.append(createCard(num)));
+    soulDone = true;
     questionReadingBtn.classList.remove("hidden");
-    soulReadingDone = true; // 設置為已觸發
   });
-
-  const displayCards = (container, cards) => {
-    cards.forEach((card) => {
-      const cardElement = createCardElement(card);
-      container.appendChild(cardElement);
-    });
-  };
 
   questionReadingBtn.addEventListener("click", () => {
     questionOptions.classList.remove("hidden");
