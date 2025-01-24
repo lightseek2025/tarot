@@ -74,4 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   blessing2025Btn.addEventListener("click", () => {
-    const blessingCardNumber =
+    const blessingCardNumber = generateRandomCards(1, usedCards)[0];
+    usedCards.push(blessingCardNumber);
+    blessingCardDisplay.innerHTML = `
+      <div class="card-inner flipped">
+        <div class="card-front">
+          <img src="cards/${blessingCardNumber}.jpeg" alt="Blessing Card">
+        </div>
+        <div class="card-back"></div>
+      </div>
+    `;
+    blessingCard.classList.remove("hidden");
+  });
+});
