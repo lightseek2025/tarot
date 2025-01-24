@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     usedCards = [...soulDeck];
     soulCards.innerHTML = '';
     displayCards(soulCards, soulDeck);
+    questionReadingBtn.classList.remove("hidden");
   });
 
   questionReadingBtn.addEventListener("click", () => {
