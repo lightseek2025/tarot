@@ -91,9 +91,8 @@ body {
 }
 
 .card {
-  width: calc(33.33% - 20px); /* 保持一行三張 */
+  width: calc(33.33% - 20px);
   aspect-ratio: 345 / 640;
-  max-width: 110px;
   border-radius: 8px;
   overflow: hidden;
   perspective: 1000px;
