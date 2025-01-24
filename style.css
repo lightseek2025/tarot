@@ -99,28 +99,38 @@ body {
   perspective: 1000px;
 }
 
-.card img {
+.card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  backface-visibility: hidden;
 }
 
-/* 春聯樣式 */
-.couplets {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+.card-front {
+  transform: rotateY(180deg);
 }
 
-.left-couplet,
-.right-couplet {
-  writing-mode: vertical-rl;
-  background: #e53935;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
+.card-back {
+  background-image: url('cards/back.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* 分隔線 */
+.separator {
+  width: 90%;
+  height: 2px;
+  background: #b85c38;
+  margin: 20px auto;
 }
