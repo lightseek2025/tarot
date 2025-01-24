@@ -1,0 +1,157 @@
+/* 全局樣式 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #fef8e6, #ffe4b5);
+  color: #5c5c5c;
+}
+
+/* Slogan 樣式 */
+.slogan h1 {
+  font-size: 28px;
+  color: #b85c38;
+  margin: 20px 0;
+}
+
+.slogan p {
+  font-size: 14px;
+  color: #6a994e;
+  margin: 5px 0;
+}
+
+/* 靈魂解讀部分 */
+.fixed-top-layer {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 248, 230, 0.95);
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+}
+
+#soulCards {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+/* 按鈕樣式 */
+.styled-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #b85c38;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin: 10px 5px;
+}
+
+.styled-btn:hover {
+  background-color: #8f2c20;
+  transform: scale(1.05);
+}
+
+.red-btn {
+  background-color: #e53935;
+}
+
+.red-btn:hover {
+  background-color: #d32f2f;
+}
+
+.yellow-btn {
+  background-color: #fbc02d;
+}
+
+.yellow-btn:hover {
+  background-color: #f9a825;
+}
+
+/* 問題解讀按鈕行樣式 */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* 卡片樣式 */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.card {
+  width: calc(33.33% - 20px); /* 保持一行三張 */
+  aspect-ratio: 345 / 640;
+  max-width: 110px;
+  border-radius: 8px;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-back {
+  background-image: url('cards/back.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* 分隔線 */
+.separator {
+  width: 90%;
+  height: 2px;
+  background: #b85c38;
+  margin: 20px auto;
+}
+
+/* 春聯樣式 */
+.couplets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.left-couplet,
+.right-couplet {
+  writing-mode: vertical-rl;
+  background: #e53935;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
