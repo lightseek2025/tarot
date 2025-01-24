@@ -46,6 +46,10 @@ body {
   background-color: #fbc02d;
 }
 
+.hidden {
+  display: none;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -55,8 +59,8 @@ body {
 }
 
 .card {
-  width: calc(30% - 10px); /* 调整卡片宽度，统一适配所有设备 */
-  aspect-ratio: 345 / 640; /* 保持 345:640 比例 */
+  width: calc(30% - 10px); /* 限制宽度，适配所有设备 */
+  aspect-ratio: 345 / 640; /* 维持比例 */
   background: url('cards/back.jpeg') center/cover no-repeat;
   border-radius: 8px;
   overflow: hidden;
