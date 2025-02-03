@@ -8,6 +8,18 @@ body {
   text-align: center;
 }
 
+/* Slogan 樣式 */
+.slogan h1 {
+  font-size: 28px;
+  color: #b85c38;
+  margin: 20px 0;
+}
+
+.slogan p {
+  font-size: 14px;
+  color: #6a994e;
+}
+
 /* 按鈕樣式 */
 button {
   padding: 10px 15px;
@@ -20,17 +32,17 @@ button {
 }
 
 .styled-btn {
-  background-color: #8f2c20;
+  background-color: #d4a373;
   color: white;
 }
 
 .red-btn {
-  background-color: #b23a2b; /* 與春聯相同的紅色 */
+  background-color: #b23a2b;
   color: white;
 }
 
 .yellow-btn {
-  background-color: #d4a373; /* 舒服的黃色 */
+  background-color: #d4a373;
   color: white;
 }
 
