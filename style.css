@@ -46,11 +46,6 @@ section.instructions {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* 新增 .invisible：僅設定 opacity:0，保留版面 */
-.invisible {
-  opacity: 0;
-}
-
 /* 靈魂解讀操作說明動畫 */
 .soul-title {
   font-size: 20px;  /* 調整字型 */
@@ -81,11 +76,12 @@ section.instructions {
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 10px;
-  opacity: 0;
+  /* 初始不透明度設定在 HTML inline style 中 */
 }
 .typewriter-text {
   display: inline-block;
 }
+
 /* 使用兩段動畫：先打字，再移除 caret */
 @keyframes typewriter {
   from { width: 0; }
@@ -154,4 +150,140 @@ button:hover {
 /* 卡片樣式 */
 .cards {
   gap: 10px;
-  justify-content
+  justify-content: center;
+  align-items: center;
+}
+#soulCards {
+  display: flex;
+  flex-direction: row;
+}
+.card {
+  width: 100px;
+  height: 150px;
+  perspective: 600px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.card-back {
+  transform: rotateY(180deg);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+/* 滾動內容區 */
+.scroll-content {
+  padding: 20px;
+}
+
+/* 領域卡牌排列：每次新增一 row */
+.cards-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 領域區塊標題與分隔線間距調整 */
+#questionCards h3 {
+  margin: 20px 0 5px;
+}
+#questionCards hr {
+  margin: 0 0 10px;
+}
+
+/* 2025 祝福牌 */
+.blessing-container {
+  margin: 20px auto;
+  max-width: 600px;
+}
+.blessing-card {
+  margin-top: 15px;
+  background: #fff;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.couplets {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.couplets .left-couplet,
+.couplets .right-couplet {
+  background-color: #ff3333;
+  color: white;
+  padding: 10px;
+  writing-mode: vertical-rl;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 40px;
+  text-align: center;
+}
+/* 調整春聯與中間祝福牌間距 */
+.couplets .left-couplet {
+  margin-right: 30px;
+}
+.couplets .right-couplet {
+  margin-left: 30px;
+}
+
+/* 隱藏 */
+.hidden {
+  display: none;
+}
+
+/* Keyframes for 靈魂解讀滑入動畫 */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
