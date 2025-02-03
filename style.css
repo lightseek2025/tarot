@@ -51,54 +51,51 @@ section.instructions {
   font-size: 24px;
   color: #b85c38;
   margin-bottom: 10px;
-  animation: fadeIn 1s ease-out;
+  opacity: 0;
+  animation: fadeIn 2s forwards; /* 2秒淡入 */
 }
 .soul-text {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 10px;
-  opacity: 0; /* 初始隱藏，動畫後顯示 */
+  opacity: 0;
 }
+/* 調整滑入動畫，時間延長至 2.5 秒 */
 .left-slide {
-  animation: slideInLeft 1.5s forwards;
+  animation: slideInLeft 2.5s forwards;
 }
 .right-slide {
-  animation: slideInRight 1.5s forwards;
+  animation: slideInRight 2.5s forwards;
 }
 
-/* 問題解讀操作說明淡入動畫 */
-.question-instructions .fade-in {
+/* 問題解讀操作說明 (Typewriter 效果) */
+.question-instructions p {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid #5c5c5c;
   font-size: 14px;
   line-height: 1.5;
+  margin-bottom: 10px;
   opacity: 0;
-  animation: fadeIn 1.5s forwards;
+}
+.typewriter-text {
+  display: inline-block;
+}
+@keyframes typewriter {
+  from { width: 0; opacity: 1; }
+  to { width: 100%; opacity: 1; }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #5c5c5c; }
+}
+/* 當加入 class typewriter 時觸發打字機效果 */
+.typewriter {
+  animation: typewriter 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  opacity: 1;
 }
 
-/* Keyframes 動畫 */
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/* 當滾動到問題解讀區時，我們將用 JS 加入 .typewriterClass 到每個段落 */
 
 /* 按鈕區 */
 .btn-container {
@@ -216,7 +213,7 @@ button:hover {
   justify-content: center;
 }
 
-/* 領域區塊標題與分隔線間距 */
+/* 領域區塊標題與分隔線間距調整 */
 #questionCards h3 {
   margin: 20px 0 5px;
 }
@@ -253,7 +250,7 @@ button:hover {
   width: 40px;
   text-align: center;
 }
-/* 將左右春聯與中間祝福牌間距調大 */
+/* 調整春聯與中間祝福牌間距 */
 .couplets .left-couplet {
   margin-right: 30px;
 }
@@ -264,4 +261,30 @@ button:hover {
 /* 隱藏 */
 .hidden {
   display: none;
+}
+
+/* Keyframes for soul instructions (慢速動畫) */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
