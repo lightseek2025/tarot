@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 用來記錄已抽出的牌（牌號 1~78）
   let usedCards = [];
   let soulDrawn = false;
-  // 記錄問題各領域所產生的區塊
+  // 記錄問題各領域所產生的區塊（每個領域一個 container）
   const questionCategories = {};
 
   // 從牌庫隨機取得 count 張牌（排除 exclude 中的牌）
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 建立卡片 DOM 並加入 container（用於靈魂解讀，覆蓋式顯示）
-  // 初始時每張卡預設加上 "flipped" class，即以背面呈現
+  // 初始時每張卡預設加上 "flipped" class，表示以背面呈現
   function displayCards(container, cards) {
     container.innerHTML = "";
     cards.forEach(card => {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 新增卡片到 container，不清除原有內容（用於問題解讀領域）
-  // 每次按下領域按鈕時，建立一個新的 .cards-row，並在 row 中加入三張卡
+  // 每按一次領域按鈕時，建立一個新的 row (.cards-row) 並在該 row 中放入三張卡
   function appendCards(container, cards) {
     const row = document.createElement("div");
     row.classList.add("cards-row");
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const section = document.createElement("div");
         section.innerHTML = `<h3>${questionType}</h3><hr>`;
         const container = document.createElement("div");
-        container.classList.add("cards");  // 此 container 將接續新增 row
+        container.classList.add("cards");  // 此 container 之後會持續新增 row
         section.appendChild(container);
         questionCards.appendChild(section);
         questionCategories[questionType] = container;
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 當按下「2025的祝福牌」按鈕時
-  // 此處不加 "flipped" class，直接呈現正面效果
+  // 此處不加入 "flipped" class，直接呈現正面效果
   blessing2025Btn.addEventListener("click", () => {
     const card = generateRandomCards(1, usedCards)[0];
     usedCards.push(card);
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="card-back"><img src="cards/back.jpeg" alt="牌背面"></div>
       </div>
     `;
-    // 移除 blessingCardDisplay 上可能的 flipped class（若有設定的話）
+    // 直接顯示祝福牌區塊
     blessingCard.classList.remove("hidden");
     // 如需動畫效果，可在此加入額外程式碼
   });
