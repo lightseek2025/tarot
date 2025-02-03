@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return available.sort(() => Math.random() - 0.5).slice(0, count);
   }
 
-  // 建立卡片 DOM 並加入 container（用於靈魂解讀，覆蓋式顯示）
-  // 初始時每張卡預設加上 "flipped" class，表示以背面呈現
+  // 建立卡片 DOM 並加入 container（用於靈魂解讀）
+  // 初始時每張卡預設加上 "flipped" class（以背面呈現）
   function displayCards(container, cards) {
     container.innerHTML = "";
     cards.forEach(card => {
@@ -48,9 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 新增卡片到 container，不清除原有內容（用於問題解讀領域）
-  // 每按一次領域按鈕時，建立一個新的 row (.cards-row) 並在該 row 中放入三張卡
+  // 新增卡片到 container，不清除原有內容（用於領域區塊）
+  // 每按一次領域按鈕，建立一個新的 row 並加入3張卡
   function appendCards(container, cards) {
+    // 檢查是否有足夠牌 (若 newCards 長度不足3，則提示已抽完)
+    if (cards.length < 3) {
+      alert("該領域的卡牌已抽完！");
+      return;
+    }
     const row = document.createElement("div");
     row.classList.add("cards-row");
     cards.forEach(card => {
@@ -75,39 +80,45 @@ document.addEventListener("DOMContentLoaded", () => {
     if (soulDrawn) return;
     const cards = generateRandomCards(3);
     usedCards.push(...cards);
-    // 顯示 sticky 區塊，並以 displayCards 顯示卡牌（初始皆為背面）
+    // 顯示靈魂解讀區，並以 displayCards 呈現（初始皆為背面）
     soulSection.classList.remove("hidden");
     displayCards(soulCards, cards);
     // 隱藏初始按鈕區
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    // 顯示下方「問題解讀」相關區塊（包含操作說明）
+    // 顯示問題解讀操作說明及按鈕區（操作說明樣式與靈魂解讀一致）
     postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
   });
 
-  // 當按下「問題解讀」按鈕時，顯示領域選項
+  // 當按下「問題解讀」按鈕時，顯示領域按鈕，並隱藏自身
   questionReadingBtn.addEventListener("click", () => {
     questionOptions.classList.remove("hidden");
+    // 隱藏問題解讀按鈕區以保持畫面乾淨
+    questionBtnContainer.classList.add("hidden");
   });
 
-  // 當在問題選項區點選任一領域按鈕時
+  // 當在領域按鈕區點選任一領域按鈕時
   questionOptions.addEventListener("click", (e) => {
     if (e.target.classList.contains("questionBtn")) {
       const questionType = e.target.dataset.type;
-      // 若該領域尚未建立其區塊，則動態新增（各領域獨立區塊）
+      // 若該領域尚未建立區塊，則動態新增
       if (!questionCategories[questionType]) {
         const section = document.createElement("div");
         section.innerHTML = `<h3>${questionType}</h3><hr>`;
         const container = document.createElement("div");
-        container.classList.add("cards");  // 此 container 之後會持續新增 row
+        container.classList.add("cards"); // 此 container 會持續新增 row
         section.appendChild(container);
         questionCards.appendChild(section);
         questionCategories[questionType] = container;
       }
       const container = questionCategories[questionType];
-      // 從剩餘牌庫抽出 3 張（扣除已使用牌）
+      // 從牌庫抽取 3 張（排除已使用牌）
       const newCards = generateRandomCards(3, usedCards);
+      if (newCards.length < 3) {
+        alert("該領域的卡牌已抽完！");
+        return;
+      }
       usedCards.push(...newCards);
       appendCards(container, newCards);
       // 顯示 2025 祝福牌按鈕（若尚未顯示）
@@ -116,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 當按下「2025的祝福牌」按鈕時
-  // 此處不加入 "flipped" class，直接呈現正面效果
+  // 直接呈現正面（不使用 flipped class）
   blessing2025Btn.addEventListener("click", () => {
     const card = generateRandomCards(1, usedCards)[0];
     usedCards.push(card);
@@ -126,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="card-back"><img src="cards/back.jpeg" alt="牌背面"></div>
       </div>
     `;
-    // 直接顯示祝福牌區塊
     blessingCard.classList.remove("hidden");
   });
 });
