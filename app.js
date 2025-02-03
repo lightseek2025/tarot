@@ -117,7 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCards(soulCards, soulUsed);
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    postSoulInstructions.classList.remove("hidden"); // 此處原本隱藏改為 remove .hidden，但因為我們用 .invisible 控制 opacity，所以在 index.html 已用 invisible
+    // 顯示問題解讀操作說明區（將 inline style opacity 設為 0 -> 1）
+    postSoulInstructions.style.opacity = "1";
+    postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
     initDecks();
   });
@@ -196,10 +198,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 利用 IntersectionObserver 監控問題解讀操作說明區（postSoulInstructions）
-  // 由於我們改用 .invisible 控制 opacity（而非 display:none），故此區仍會被觀察
+  // 當進入 viewport 時，對內部所有 .typewriter-text 元素開始打字機效果
   const observerOptions = {
     root: null,
-    threshold: 0.5
+    threshold: 0 // 只要有一點進入 viewport 就觸發
   };
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -210,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
           el.textContent = "";
           typewriterEffect(el, fullText);
         });
-        // 觀察一次後取消觀察
         obs.unobserve(entry.target);
       }
     });
