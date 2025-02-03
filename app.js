@@ -19,13 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let soulUsed = [];
   let soulDrawn = false;
 
-  // 儲存各領域獨立的牌庫（初始為 fullDeck() 減去 soulUsed），領域名稱作為 key
+  // 儲存各領域獨立的牌庫，及建立領域區塊的參考
   const domainDecks = {};
-
   // 2025 祝福牌獨立的牌庫
   let blessingDeck = [];
 
-  // 正確宣告 questionCategories 物件
+  // 宣告 questionCategories 物件，用於儲存各領域區塊與牌庫參考
   const questionCategories = {};
 
   // 回傳完整牌庫：[1, 2, …, 78]
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return Array.from({ length: 78 }, (_, i) => i + 1);
   }
 
-  // 從傳入的牌庫中隨機抽取 count 張牌，並從該陣列中移除這些牌
+  // 從傳入的牌庫 (deck) 中隨機抽取 count 張牌，並從該陣列中移除這些牌
   function drawCards(deck, count) {
     const drawn = [];
     for (let i = 0; i < count; i++) {
@@ -179,4 +178,26 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     blessingCard.classList.remove("hidden");
   });
+
+  // 利用 IntersectionObserver 監控問題解讀操作說明區是否進入 viewport，
+  // 若進入則為其中的段落加入 typewriter 效果（透過加入 class "typewriter"）
+  const observerOptions = {
+    root: null,
+    threshold: 0.5 // 當至少 50% 出現在 viewport 時觸發
+  };
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 為該區塊內所有 .typewriter-text 加上 class "typewriter"
+        const typewriterTexts = entry.target.querySelectorAll(".typewriter-text");
+        typewriterTexts.forEach(el => {
+          el.classList.add("typewriter");
+        });
+        // 觸發後取消觀察
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  // 監控問題解讀操作說明區
+  observer.observe(postSoulInstructions);
 });
