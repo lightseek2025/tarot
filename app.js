@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 用來記錄已抽出的牌（牌號 1~78）
   let usedCards = [];
   let soulDrawn = false;
-  // 記錄問題各領域所產生的區塊（每個領域一個 container）
+  // 記錄各領域區塊（每個領域一個 container）
   const questionCategories = {};
 
   // 從牌庫隨機取得 count 張牌（排除 exclude 中的牌）
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 隱藏初始按鈕區
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    // 顯示下方「問題解讀」相關區塊
+    // 顯示下方「問題解讀」相關區塊（包含操作說明）
     postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
   });
@@ -128,6 +128,5 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     // 直接顯示祝福牌區塊
     blessingCard.classList.remove("hidden");
-    // 如需動畫效果，可在此加入額外程式碼
   });
 });
