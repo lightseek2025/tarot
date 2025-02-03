@@ -106,7 +106,7 @@ button:hover {
 
 /* 卡片樣式 */
 .cards {
-  /* 若在靈魂解讀區，排列為水平方向 */
+  /* 靈魂解讀區卡牌排列由左至右 */
   gap: 10px;
   justify-content: center;
   align-items: center;
@@ -129,7 +129,7 @@ button:hover {
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
-/* 若卡片含有 .flipped，顯示背面 */
+/* 若卡片含有 .flipped，則顯示背面 */
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
@@ -145,10 +145,10 @@ button:hover {
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: contain;  /* 改為 contain，避免圖片裁剪 */
+  object-fit: contain;  /* 以 contain 呈現完整圖片，不裁切 */
   border-radius: 5px;
 }
-/* 設定卡片背面樣式，顯示背面圖片 */
+/* 卡片背面樣式，載入背面圖片 */
 .card-back {
   transform: rotateY(180deg);
   border-radius: 5px;
@@ -166,7 +166,7 @@ button:hover {
   padding: 20px;
 }
 
-/* 針對領域卡牌的排列：每次新增一 row */
+/* 領域卡牌排列：每次新增一 row */
 .cards-row {
   display: flex;
   gap: 10px;
@@ -190,18 +190,25 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  /* 移除預設 gap，改用個別 margin 調整 */
 }
 .couplets .left-couplet,
 .couplets .right-couplet {
   background-color: #ff3333;
   color: white;
   padding: 10px;
-  writing-mode: vertical-rl;  /* 垂直書寫，模擬春聯 */
+  writing-mode: vertical-rl;  /* 垂直書寫 */
   font-size: 16px;
   border-radius: 5px;
   width: 40px;
   text-align: center;
+}
+/* 調整左右春聯與中間祝福牌的間距 */
+.couplets .left-couplet {
+  margin-right: 20px;
+}
+.couplets .right-couplet {
+  margin-left: 20px;
 }
 
 /* 隱藏樣式 */
