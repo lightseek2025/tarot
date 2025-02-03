@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 取得元素
+  // 取得頁面元素
   const soulReadingBtn = document.getElementById("soulReadingBtn");
   const soulSection = document.getElementById("soulSection");
   const soulCards = document.getElementById("soulCards");
@@ -15,21 +15,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const blessingCard = document.getElementById("blessingCard");
   const blessingCardDisplay = document.getElementById("blessingCardDisplay");
 
-  // 靈魂解讀使用的牌（抽出 3 張），後續各領域與祝福牌的牌庫均從完整牌庫扣除這 3 張
+  // 全局變數宣告
+  // 用於儲存靈魂解讀抽出的牌（3 張），後續所有領域與祝福牌的牌庫均從完整牌庫扣除這 3 張
   let soulUsed = [];
   let soulDrawn = false;
 
-  // 各領域獨立的牌庫（初始為 fullDeck() 減去 soulUsed），儲存在 domainDecks 物件中
+  // 儲存各領域獨立的牌庫（初始為 fullDeck() 減去 soulUsed），領域名稱作為 key
   const domainDecks = {};
-  // 2025 祝福牌獨立牌庫
+
+  // 2025 祝福牌獨立的牌庫
   let blessingDeck = [];
 
-  // 回傳完整牌庫 [1, 2, ..., 78]
+  // 這裡正確宣告 questionCategories 物件（用於儲存各領域的區塊資訊），確保後續不會報錯
+  const questionCategories = {};
+
+  // 回傳完整牌庫：[1, 2, …, 78]
   function fullDeck() {
     return Array.from({ length: 78 }, (_, i) => i + 1);
   }
 
-  // 從傳入的牌庫 (deck) 中隨機抽取 count 張，並從該陣列中移除這些牌
+  // 從傳入的牌庫 (deck) 中隨機抽取 count 張牌，並從該陣列中移除這些牌
   function drawCards(deck, count) {
     const drawn = [];
     for (let i = 0; i < count; i++) {
@@ -54,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 建立卡片 DOM 並加入 container（用於靈魂解讀）
-  // 每張牌初始加上 "flipped" class，表示以背面呈現
+  // 每張牌初始加上 "flipped" class（顯示背面）
   function displayCards(container, cards) {
     container.innerHTML = "";
     cards.forEach(card => {
@@ -109,18 +114,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // 當按下「靈魂解讀」按鈕時
   soulReadingBtn.addEventListener("click", () => {
     if (soulDrawn) return;
+    // 從完整牌庫抽 3 張作為靈魂解讀
     soulUsed = drawCards(fullDeck(), 3);
     console.log("靈魂解讀抽出的牌：", soulUsed);
     soulSection.classList.remove("hidden");
     displayCards(soulCards, soulUsed);
+    // 隱藏初始按鈕區
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
+    // 顯示問題解讀操作說明與問題解讀按鈕區
     postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
+    // 初始化各領域與祝福牌的獨立牌庫
     initDecks();
   });
 
-  // 當按下「問題解讀」按鈕時，隱藏該按鈕區，並顯示領域按鈕區
+  // 當按下「問題解讀」按鈕時，隱藏該按鈕區，顯示領域按鈕區
   questionReadingBtn.addEventListener("click", () => {
     questionOptions.classList.remove("hidden");
     questionBtnContainer.classList.add("hidden");
@@ -141,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.classList.add("cards");
         section.appendChild(container);
         questionCards.appendChild(section);
+        // 儲存此領域的 container 與牌庫參考（從 domainDecks 中取）
         questionCategories[domain] = { container, deck: domainDecks[domain] };
         console.log(`建立領域區塊：${domain}`);
       }
@@ -152,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       appendCards(container, newCards);
+      // 顯示 2025 祝福牌區（如果尚未顯示）
       blessingContainer.classList.remove("hidden");
     }
   });
