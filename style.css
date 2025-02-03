@@ -19,7 +19,7 @@ body {
   color: #6a994e;
 }
 
-/* 靈魂解讀置頂容器 */
+/* 靈魂解讀置頂 */
 .sticky-container {
   position: sticky;
   top: 0;
@@ -41,8 +41,7 @@ body {
 /* 卡片樣式 */
 .card {
   width: 100px;
-  height: 186px; /* 維持345x640比例，縮小 */
-  position: relative;
+  height: 186px;
   perspective: 1000px;
 }
 
@@ -77,6 +76,31 @@ body {
   background-position: center;
 }
 
+/* 按鈕樣式 */
+button {
+  padding: 10px 15px;
+  margin: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.red-btn {
+  background-color: #b23a2b;
+  color: white;
+}
+
+.yellow-btn {
+  background-color: #d4a373;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
 /* 分隔線 */
 .separator {
   height: 2px;
@@ -84,24 +108,9 @@ body {
   margin: 20px 0;
 }
 
-/* 隱藏元素 */
-.hidden {
-  display: none;
-}
-
-/* 按鈕樣式 */
-button {
-  padding: 10px 15px;
-  margin: 10px 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  background-color: #d4a373;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: #b85c38;
+/* 春聯 */
+.couplets {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
