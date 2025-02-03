@@ -31,7 +31,7 @@ header.header .slogan {
   line-height: 1.5;
 }
 
-/* 操作說明區塊 (調整為米色背景) */
+/* 操作說明區塊 (米色背景) */
 section.instructions {
   max-width: 600px;
   margin: 20px auto;
@@ -68,12 +68,12 @@ button {
   background-color: #d4a373;
   color: white;
 }
-/* 調整紅色按鈕為較亮紅 */
+/* 紅色按鈕 */
 .red-btn {
   background-color: #ff3333;
   color: white;
 }
-/* 調整黃色按鈕為陽光黃色 */
+/* 黃色按鈕 */
 .yellow-btn {
   background-color: #ffcc00;
   color: white;
@@ -82,7 +82,7 @@ button:hover {
   opacity: 0.8;
 }
 
-/* 調整領域按鈕間距（縮小上下間距） */
+/* 領域按鈕間距縮小 */
 .btn-row {
   display: flex;
   justify-content: center;
@@ -119,7 +119,6 @@ button:hover {
   width: 100px;
   height: 150px;
   perspective: 600px;
-  /* 新增陰影效果，提升立體感 */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .card-inner {
@@ -129,7 +128,6 @@ button:hover {
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
-/* 若卡片含有 .flipped，則顯示背面 */
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
@@ -145,10 +143,9 @@ button:hover {
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: contain;  /* 以 contain 呈現完整圖片，不裁切 */
+  object-fit: contain;
   border-radius: 5px;
 }
-/* 卡片背面樣式，載入背面圖片 */
 .card-back {
   transform: rotateY(180deg);
   border-radius: 5px;
@@ -161,16 +158,24 @@ button:hover {
   border-radius: 5px;
 }
 
-/* 滾動內容區（包含問題解讀相關） */
+/* 滾動內容區 */
 .scroll-content {
   padding: 20px;
 }
 
-/* 領域卡牌排列：每次新增一 row */
+/* 領域卡牌排列，每次新增一 row */
 .cards-row {
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+
+/* 領域區塊標題與分隔線間距 */
+#questionCards h3 {
+  margin: 20px 0 5px;
+}
+#questionCards hr {
+  margin: 0 0 10px;
 }
 
 /* 2025祝福牌樣式 */
@@ -190,20 +195,19 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 移除預設 gap，改用個別 margin 調整 */
 }
 .couplets .left-couplet,
 .couplets .right-couplet {
   background-color: #ff3333;
   color: white;
   padding: 10px;
-  writing-mode: vertical-rl;  /* 垂直書寫 */
+  writing-mode: vertical-rl;
   font-size: 16px;
   border-radius: 5px;
   width: 40px;
   text-align: center;
 }
-/* 調整左右春聯與中間祝福牌的間距 */
+/* 將左右春聯與中間祝福牌的間距調大 */
 .couplets .left-couplet {
   margin-right: 20px;
 }
@@ -211,7 +215,7 @@ button:hover {
   margin-left: 20px;
 }
 
-/* 隱藏樣式 */
+/* 隱藏 */
 .hidden {
   display: none;
 }
