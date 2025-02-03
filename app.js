@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let soulUsed = [];
   let soulDrawn = false;
 
-  // 儲存各領域獨立的牌庫，及建立領域區塊的參考
+  // 儲存各領域獨立的牌庫（領域名稱作為 key）
   const domainDecks = {};
   // 2025 祝福牌獨立的牌庫
   let blessingDeck = [];
 
-  // 宣告 questionCategories 物件，用於儲存各領域區塊與牌庫參考
+  // 儲存各領域區塊與牌庫參考
   const questionCategories = {};
 
   // 回傳完整牌庫：[1, 2, …, 78]
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return Array.from({ length: 78 }, (_, i) => i + 1);
   }
 
-  // 從傳入的牌庫 (deck) 中隨機抽取 count 張牌，並從該陣列中移除這些牌
+  // 從牌庫 (deck) 中隨機抽取 count 張牌，並移除這些牌
   function drawCards(deck, count) {
     const drawn = [];
     for (let i = 0; i < count; i++) {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張卡
+  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張牌
   function appendCards(container, cards) {
     if (cards.length < 3) {
       alert("該領域的卡牌已抽完！");
@@ -179,25 +179,40 @@ document.addEventListener("DOMContentLoaded", () => {
     blessingCard.classList.remove("hidden");
   });
 
+  // --- Typewriter 效果 ---
+  // 此函式逐字輸出 text 至 element，並依照標點延長延遲，打字後文字保留
+  function typewriterEffect(element, text, index = 0) {
+    if (index < text.length) {
+      element.innerHTML += text.charAt(index);
+      let delay = 50; // 基本延遲
+      const char = text.charAt(index);
+      if (",.;!?".includes(char)) {
+        delay = 300; // 標點延長
+      }
+      setTimeout(() => {
+        typewriterEffect(element, text, index + 1);
+      }, delay);
+    }
+  }
+
   // 利用 IntersectionObserver 監控問題解讀操作說明區是否進入 viewport，
-  // 若進入則為其中的段落加入 typewriter 效果（透過加入 class "typewriter"）
+  // 當進入時，對其中每個 .typewriter-text 元素開始執行打字機效果
   const observerOptions = {
     root: null,
-    threshold: 0.5 // 當至少 50% 出現在 viewport 時觸發
+    threshold: 0.5
   };
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // 為該區塊內所有 .typewriter-text 加上 class "typewriter"
         const typewriterTexts = entry.target.querySelectorAll(".typewriter-text");
         typewriterTexts.forEach(el => {
-          el.classList.add("typewriter");
+          const fullText = el.textContent;
+          el.textContent = "";
+          typewriterEffect(el, fullText);
         });
-        // 觸發後取消觀察
-        observer.unobserve(entry.target);
+        obs.unobserve(entry.target);
       }
     });
   }, observerOptions);
-  // 監控問題解讀操作說明區
   observer.observe(postSoulInstructions);
 });
