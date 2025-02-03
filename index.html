@@ -4,50 +4,372 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>尋光屋 - 線上塔羅牌解讀</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 基本重置與版型設定 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef8e6, #ffe4b5);
+      color: #5c5c5c;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: underline; }
+
+    /* 頂部區塊：標題與 Slogan */
+    header.header {
+      padding: 20px;
+    }
+    header.header h1 {
+      font-size: 32px;
+      color: #b85c38;
+      margin-bottom: 10px;
+    }
+    header.header .slogan {
+      font-size: 16px;
+      color: #6a994e;
+      line-height: 1.5;
+    }
+
+    /* 操作說明區塊 (參考指定網站的樣式，可自行調整) */
+    section.instructions {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      border: 2px solid #d4a373;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: left;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    section.instructions h2 {
+      margin-bottom: 10px;
+      color: #b85c38;
+    }
+    section.instructions p {
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    /* 按鈕樣式 */
+    .btn-container {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .styled-btn {
+      background-color: #d4a373;
+      color: white;
+    }
+    .red-btn {
+      background-color: #b23a2b;
+      color: white;
+    }
+    .yellow-btn {
+      background-color: #d4a373;
+      color: white;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* sticky 區塊：靈魂解讀結果 */
+    .sticky-section {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 2px solid #d4a373;
+      padding: 15px 0;
+      z-index: 10;
+    }
+    .sticky-section h2 {
+      color: #b85c38;
+      margin-bottom: 10px;
+    }
+
+    /* 卡片樣式 */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .card {
+      width: 100px;
+      height: 150px;
+      perspective: 600px;
+      margin: 0 auto;
+    }
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .card-back {
+      background: #d4a373;
+      transform: rotateY(180deg);
+      border-radius: 5px;
+    }
+
+    /* 滾動內容區（包含問題解讀相關） */
+    .scroll-content {
+      padding: 20px;
+    }
+
+    /* 問題解讀區塊與領域按鈕 */
+    #questionOptions {
+      margin: 15px auto;
+      max-width: 600px;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    /* 2025祝福牌樣式 */
+    .blessing-container {
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .blessing-card {
+      margin-top: 15px;
+      background: #fff;
+      border: 2px solid #d4a373;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .couplets {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .couplets .left-couplet,
+    .couplets .right-couplet {
+      font-size: 14px;
+      color: #b85c38;
+      margin: 0 10px;
+      width: 80px;
+    }
+
+    /* 隱藏樣式 */
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <!-- 頂部 Slogan -->
-  <div class="slogan">
+  <!-- 初始畫面：尋光屋標題、Slogan 與操作說明 -->
+  <header class="header">
     <h1>尋光屋</h1>
-    <p>「用溫暖的陪伴，陪你尋找內心的光，</p>
-    <p>照亮前行的路，將療癒融入生活。」</p>
+    <p class="slogan">「用溫暖的陪伴，陪你尋找內心的光，照亮前行的路，將療癒融入生活。」</p>
+  </header>
+
+  <section class="instructions">
+    <h2>操作說明</h2>
+    <p>點選下方「靈魂解讀」按鈕，系統將從78張塔羅牌中隨機抽取3張，作為您靈魂的解讀牌。</p>
+    <p>牌面可點擊以翻轉，正反兩面均保持相同比例。</p>
+  </section>
+
+  <div class="btn-container initial">
+    <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
   </div>
 
-  <!-- 靈魂解讀（置頂） -->
-  <div id="soulContainer" class="sticky-container">
+  <!-- Sticky 區塊：靈魂解讀結果（預設隱藏） -->
+  <div id="soulSection" class="sticky-section hidden">
     <h2>靈魂解讀</h2>
-    <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
     <div id="soulCards" class="cards"></div>
   </div>
 
-  <!-- 問題解讀 -->
-  <div id="questionSection">
-    <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
+  <!-- 下方滾動內容：問題解讀區及後續操作 -->
+  <div class="scroll-content">
+    <!-- 問題解讀操作說明（預設隱藏，於靈魂解讀後出現） -->
+    <div id="postSoulInstructions" class="instructions hidden">
+      <h2>問題解讀操作說明</h2>
+      <p>請點選下方「問題解讀」按鈕，並選擇您想探討的領域（例如：感情、學業等）。</p>
+    </div>
+
+    <!-- 問題解讀按鈕區（預設隱藏） -->
+    <div class="btn-container hidden" id="questionBtnContainer">
+      <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
+    </div>
+
+    <!-- 問題選項按鈕（預設隱藏） -->
     <div id="questionOptions" class="hidden">
       <div class="btn-row">
-        <button class="questionBtn red-btn hidden" data-type="感情">感情</button>
-        <button class="questionBtn red-btn hidden" data-type="人際關係">人際關係</button>
+        <button class="questionBtn red-btn" data-type="感情">感情</button>
+        <button class="questionBtn red-btn" data-type="人際關係">人際關係</button>
       </div>
       <div class="btn-row">
-        <button class="questionBtn yellow-btn hidden" data-type="學業">學業</button>
-        <button class="questionBtn yellow-btn hidden" data-type="事業">事業</button>
-        <button class="questionBtn yellow-btn hidden" data-type="財運">財運</button>
+        <button class="questionBtn yellow-btn" data-type="學業">學業</button>
+        <button class="questionBtn yellow-btn" data-type="事業">事業</button>
+        <button class="questionBtn yellow-btn" data-type="財運">財運</button>
       </div>
     </div>
-    <div id="questionCards"></div>
-  </div>
 
-  <!-- 2025祝福牌 -->
-  <button id="blessing2025Btn" class="hidden">2025的祝福牌</button>
-  <div id="blessingCard" class="hidden">
-    <div class="couplets">
-      <div class="left-couplet">解惑塔羅療心靈</div>
-      <div id="blessingCardDisplay" class="card"></div>
-      <div class="right-couplet">命運驚喜藏心裡</div>
+    <!-- 顯示問題解讀牌卡的區域 -->
+    <div id="questionCards"></div>
+
+    <!-- 2025祝福牌區（預設隱藏） -->
+    <div class="blessing-container hidden" id="blessingContainer">
+      <button id="blessing2025Btn" class="styled-btn">2025的祝福牌</button>
+      <div id="blessingCard" class="blessing-card hidden">
+        <div class="couplets">
+          <div class="left-couplet">解惑塔羅療心靈</div>
+          <div id="blessingCardDisplay" class="card"></div>
+          <div class="right-couplet">命運驚喜藏心裡</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script>
+    // 等待 DOM 載入完成
+    document.addEventListener("DOMContentLoaded", () => {
+      // 取得各區塊與按鈕元素
+      const soulReadingBtn = document.getElementById("soulReadingBtn");
+      const soulSection = document.getElementById("soulSection");
+      const soulCards = document.getElementById("soulCards");
+
+      const postSoulInstructions = document.getElementById("postSoulInstructions");
+      const questionBtnContainer = document.getElementById("questionBtnContainer");
+      const questionReadingBtn = document.getElementById("questionReadingBtn");
+      const questionOptions = document.getElementById("questionOptions");
+      const questionCards = document.getElementById("questionCards");
+
+      const blessingContainer = document.getElementById("blessingContainer");
+      const blessing2025Btn = document.getElementById("blessing2025Btn");
+      const blessingCard = document.getElementById("blessingCard");
+      const blessingCardDisplay = document.getElementById("blessingCardDisplay");
+
+      // 用來記錄已抽出的牌（牌號 1~78）
+      let usedCards = [];
+      let soulDrawn = false;
+      // 記錄問題各領域所產生的區塊
+      const questionCategories = {};
+
+      // 從牌庫隨機取得 count 張牌（排除 exclude 中的牌）
+      function generateRandomCards(count, exclude = []) {
+        const deck = Array.from({ length: 78 }, (_, i) => i + 1);
+        const available = deck.filter(card => !exclude.includes(card));
+        // 隨機排序後取出 count 張
+        return available.sort(() => Math.random() - 0.5).slice(0, count);
+      }
+
+      // 建立卡片 DOM 並加入 container
+      function displayCards(container, cards) {
+        container.innerHTML = "";
+        cards.forEach(card => {
+          const cardDiv = document.createElement("div");
+          cardDiv.classList.add("card");
+          cardDiv.innerHTML = `
+            <div class="card-inner">
+              <div class="card-front"><img src="cards/${card}.jpeg" alt="牌 ${card}"></div>
+              <div class="card-back"></div>
+            </div>
+          `;
+          // 點擊卡片時加入翻轉效果（切換 .flipped class）
+          cardDiv.addEventListener("click", () => {
+            cardDiv.classList.toggle("flipped");
+          });
+          container.appendChild(cardDiv);
+        });
+      }
+
+      // 當按下「靈魂解讀」按鈕時
+      soulReadingBtn.addEventListener("click", () => {
+        if (soulDrawn) return;
+        // 從 78 張中隨機抽出 3 張
+        const cards = generateRandomCards(3);
+        usedCards.push(...cards);
+        // 顯示 sticky 區塊（置頂顯示）
+        soulSection.classList.remove("hidden");
+        displayCards(soulCards, cards);
+        // 隱藏初始「靈魂解讀」按鈕區塊（避免重複操作）
+        document.querySelector(".btn-container.initial").classList.add("hidden");
+        soulDrawn = true;
+
+        // 顯示下方「問題解讀」操作說明與按鈕
+        postSoulInstructions.classList.remove("hidden");
+        questionBtnContainer.classList.remove("hidden");
+      });
+
+      // 當按下「問題解讀」按鈕時，顯示領域選項（隱藏狀態解除）
+      questionReadingBtn.addEventListener("click", () => {
+        questionOptions.classList.remove("hidden");
+      });
+
+      // 當在問題選項區點選任一領域按鈕時
+      questionOptions.addEventListener("click", (e) => {
+        if (e.target.classList.contains("questionBtn")) {
+          const questionType = e.target.dataset.type;
+          // 若該領域尚未建立其區塊，則動態新增
+          if (!questionCategories[questionType]) {
+            const section = document.createElement("div");
+            section.innerHTML = `<h3>${questionType}</h3><hr>`;
+            const container = document.createElement("div");
+            container.classList.add("cards");
+            section.appendChild(container);
+            questionCards.appendChild(section);
+            questionCategories[questionType] = container;
+          }
+          const container = questionCategories[questionType];
+          // 從剩餘牌庫抽出 3 張（扣除已使用的牌）
+          const newCards = generateRandomCards(3, usedCards);
+          usedCards.push(...newCards);
+          displayCards(container, newCards);
+          // 顯示 2025 祝福牌按鈕（若尚未顯示）
+          blessingContainer.classList.remove("hidden");
+        }
+      });
+
+      // 當按下「2025的祝福牌」按鈕時
+      blessing2025Btn.addEventListener("click", () => {
+        const card = generateRandomCards(1, usedCards)[0];
+        usedCards.push(card);
+        // 於祝福牌區域顯示該牌，直接以正面呈現
+        blessingCardDisplay.innerHTML = `<div class="card-inner">
+            <div class="card-front"><img src="cards/${card}.jpeg" alt="牌 ${card}"></div>
+            <div class="card-back"></div>
+          </div>`;
+        // 顯示祝福牌容器
+        blessingCard.classList.remove("hidden");
+
+        // 可在此加入動畫效果，例如：淡入或滑出效果
+      });
+    });
+  </script>
 </body>
 </html>
