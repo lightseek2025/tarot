@@ -32,8 +32,9 @@
 
   <!-- 下方滾動內容：問題解讀區及後續操作 -->
   <div class="scroll-content">
-    <!-- 問題解讀操作說明區（預設隱藏）：當此區進入 viewport 時，打字機效果將啟動 -->
-    <div id="postSoulInstructions" class="instructions question-instructions hidden">
+    <!-- 問題解讀操作說明區：
+         改用 .invisible（opacity:0）而非 .hidden，讓觀察器能偵測 -->
+    <div id="postSoulInstructions" class="instructions question-instructions invisible">
       <p class="typewriter-text">人只要活著就時時刻刻在做取捨。做取捨那是因為你還有選擇的機會。所以只要你遵從自己的內心，怎麼選都沒錯。</p>
       <p class="typewriter-text">別人還沒限制你。別先把自己給限制住了</p>
     </div>
@@ -52,26 +53,3 @@
       <div class="btn-row">
         <button class="questionBtn yellow-btn" data-type="學業">學業</button>
         <button class="questionBtn yellow-btn" data-type="事業">事業</button>
-        <button class="questionBtn yellow-btn" data-type="財運">財運</button>
-      </div>
-    </div>
-
-    <!-- 顯示各領域抽牌結果 -->
-    <div id="questionCards"></div>
-
-    <!-- 2025 祝福牌區（預設隱藏） -->
-    <div class="blessing-container hidden" id="blessingContainer">
-      <button id="blessing2025Btn" class="styled-btn">2025的祝福牌</button>
-      <div id="blessingCard" class="blessing-card hidden">
-        <div class="couplets">
-          <div class="left-couplet">解惑塔羅療心靈</div>
-          <div id="blessingCardDisplay" class="card"></div>
-          <div class="right-couplet">命運驚喜藏心裡</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
