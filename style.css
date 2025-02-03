@@ -170,7 +170,7 @@ button:hover {
   justify-content: center;
 }
 
-/* 領域區塊標題與分隔線間距 */
+/* 領域區塊標題與分隔線間距調整 */
 #questionCards h3 {
   margin: 20px 0 5px;
 }
@@ -178,7 +178,7 @@ button:hover {
   margin: 0 0 10px;
 }
 
-/* 2025祝福牌樣式 */
+/* 2025 祝福牌樣式 */
 .blessing-container {
   margin: 20px auto;
   max-width: 600px;
@@ -209,13 +209,13 @@ button:hover {
 }
 /* 將左右春聯與中間祝福牌的間距調大 */
 .couplets .left-couplet {
-  margin-right: 20px;
+  margin-right: 30px;
 }
 .couplets .right-couplet {
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
-/* 隱藏 */
+/* 隱藏樣式 */
 .hidden {
   display: none;
 }
