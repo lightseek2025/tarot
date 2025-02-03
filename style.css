@@ -1,56 +1,196 @@
-/* 全局樣式 */
-body {
-  font-family: Arial, sans-serif;
+/* 基本重置與版型設定 */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #fef8e6, #ffe4b5);
   color: #5c5c5c;
   text-align: center;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+  text-decoration: underline;
 }
 
-/* Slogan 樣式 */
-.slogan h1 {
-  font-size: 28px;
+/* 頂部區塊：標題與 Slogan */
+header.header {
+  padding: 20px;
+}
+header.header h1 {
+  font-size: 32px;
   color: #b85c38;
-  margin: 20px 0;
+  margin-bottom: 10px;
+}
+header.header .slogan {
+  font-size: 16px;
+  color: #6a994e;
+  line-height: 1.5;
 }
 
-.slogan p {
-  font-size: 14px;
-  color: #6a994e;
+/* 操作說明區塊 (調整為米色背景) */
+section.instructions {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #f9f1e7;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+section.instructions h2 {
+  margin-bottom: 10px;
+  color: #b85c38;
+}
+section.instructions p {
+  margin-bottom: 8px;
+  line-height: 1.4;
 }
 
 /* 按鈕樣式 */
+.btn-container {
+  margin: 20px;
+}
 button {
   padding: 10px 15px;
   margin: 10px;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .styled-btn {
   background-color: #d4a373;
   color: white;
 }
-
+/* 調整紅色按鈕為較亮紅 */
 .red-btn {
-  background-color: #b23a2b;
+  background-color: #ff3333;
   color: white;
 }
-
+/* 調整黃色按鈕為陽光黃色 */
 .yellow-btn {
-  background-color: #d4a373;
+  background-color: #ffcc00;
   color: white;
 }
-
 button:hover {
   opacity: 0.8;
 }
 
-/* 隱藏元素 */
+/* sticky 區塊：靈魂解讀結果 */
+.sticky-section {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 2px solid #d4a373;
+  padding: 15px 0;
+  z-index: 10;
+}
+.sticky-section h2 {
+  color: #b85c38;
+  margin-bottom: 10px;
+}
+
+/* 卡片樣式 */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.card {
+  width: 100px;
+  height: 150px;
+  perspective: 600px;
+  margin: 0 auto;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* 設定卡片背面樣式，置中顯示文字（您可自行換成圖片或其他設計） */
+.card-back {
+  background: #d4a373;
+  transform: rotateY(180deg);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+}
+
+/* 滾動內容區（包含問題解讀相關） */
+.scroll-content {
+  padding: 20px;
+}
+
+/* 問題解讀區塊與領域按鈕 */
+#questionOptions {
+  margin: 15px auto;
+  max-width: 600px;
+}
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+/* 2025祝福牌樣式 */
+.blessing-container {
+  margin: 20px auto;
+  max-width: 600px;
+}
+.blessing-card {
+  margin-top: 15px;
+  background: #fff;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.couplets {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.couplets .left-couplet,
+.couplets .right-couplet {
+  font-size: 14px;
+  /* 調整春聯文字為亮紅 */
+  color: #ff3333;
+  margin: 0 10px;
+  width: 80px;
+}
+
+/* 隱藏樣式 */
 .hidden {
   display: none;
 }
