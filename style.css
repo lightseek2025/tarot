@@ -82,12 +82,12 @@ button:hover {
   opacity: 0.8;
 }
 
-/* 調整領域按鈕間距 */
+/* 調整領域按鈕間距（縮小上下間距） */
 .btn-row {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 5px 0; /* 上下間距縮小 */
+  margin: 3px 0;
 }
 
 /* sticky 區塊：靈魂解讀結果 */
@@ -106,15 +106,21 @@ button:hover {
 
 /* 卡片樣式 */
 .cards {
-  display: flex;
-  flex-direction: column; /* 對於領域卡區，後續會以 row 區分 */
+  /* 若在靈魂解讀區，排列為水平方向 */
   gap: 10px;
+  justify-content: center;
   align-items: center;
+}
+#soulCards {
+  display: flex;
+  flex-direction: row;
 }
 .card {
   width: 100px;
   height: 150px;
   perspective: 600px;
+  /* 新增陰影效果，提升立體感 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .card-inner {
   width: 100%;
@@ -139,7 +145,7 @@ button:hover {
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;  /* 改為 contain，避免圖片裁剪 */
   border-radius: 5px;
 }
 /* 設定卡片背面樣式，顯示背面圖片 */
@@ -151,13 +157,20 @@ button:hover {
 .card-back img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 5px;
 }
 
 /* 滾動內容區（包含問題解讀相關） */
 .scroll-content {
   padding: 20px;
+}
+
+/* 針對領域卡牌的排列：每次新增一 row */
+.cards-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 /* 2025祝福牌樣式 */
@@ -184,7 +197,7 @@ button:hover {
   background-color: #ff3333;
   color: white;
   padding: 10px;
-  writing-mode: vertical-rl;  /* 垂直書寫 */
+  writing-mode: vertical-rl;  /* 垂直書寫，模擬春聯 */
   font-size: 16px;
   border-radius: 5px;
   width: 40px;
@@ -194,11 +207,4 @@ button:hover {
 /* 隱藏樣式 */
 .hidden {
   display: none;
-}
-
-/* 針對領域卡牌的排版，每次新增一 row */
-.cards-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
 }
