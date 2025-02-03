@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const blessingCardDisplay = document.getElementById("blessingCardDisplay");
 
   let usedCards = [];
+  let soulDrawn = false;
   const questionCategories = {};
 
   function generateRandomCards(count, exclude = []) {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayCards(container, cards) {
+    container.innerHTML = "";
     cards.forEach(card => {
       const cardElement = document.createElement("div");
       cardElement.classList.add("card");
@@ -29,14 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   soulReadingBtn.addEventListener("click", () => {
+    if (soulDrawn) return;
     const cards = generateRandomCards(3);
     usedCards.push(...cards);
     displayCards(soulCards, cards);
     soulReadingBtn.classList.add("hidden");
+    soulDrawn = true;
   });
 
   questionReadingBtn.addEventListener("click", () => {
-    questionOptions.classList.remove("hidden");
+    document.querySelectorAll(".questionBtn").forEach(btn => btn.classList.remove("hidden"));
   });
 
   questionOptions.addEventListener("click", (e) => {
@@ -53,6 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const container = questionCategories[questionType];
       displayCards(container, generateRandomCards(3, usedCards));
+      blessing2025Btn.classList.remove("hidden");
     }
+  });
+
+  blessing2025Btn.addEventListener("click", () => {
+    const card = generateRandomCards(1, usedCards)[0];
+    blessingCardDisplay.innerHTML = `<img src="cards/${card}.jpeg">`;
+    blessingCardDisplay.classList.remove("hidden");
   });
 });
