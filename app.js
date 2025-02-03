@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return Array.from({ length: 78 }, (_, i) => i + 1);
   }
 
-  // 從牌庫 (deck) 中隨機抽取 count 張牌，並移除這些牌
+  // 從牌庫 (deck) 中隨機抽取 count 張牌，並從該陣列中移除這些牌
   function drawCards(deck, count) {
     const drawn = [];
     for (let i = 0; i < count; i++) {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張牌
+  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張卡
   function appendCards(container, cards) {
     if (cards.length < 3) {
       alert("該領域的卡牌已抽完！");
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCards(soulCards, soulUsed);
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    postSoulInstructions.classList.remove("hidden");
+    postSoulInstructions.classList.remove("hidden"); // 此處原本隱藏改為 remove .hidden，但因為我們用 .invisible 控制 opacity，所以在 index.html 已用 invisible
     questionBtnContainer.classList.remove("hidden");
     initDecks();
   });
@@ -180,14 +180,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Typewriter 效果 ---
-  // 此函式逐字輸出 text 至 element，並依照標點延長延遲，打字後文字保留
+  // 此函式逐字將 text 輸出到 element，遇標點延長延遲；完成後文字保持不變
   function typewriterEffect(element, text, index = 0) {
     if (index < text.length) {
       element.innerHTML += text.charAt(index);
-      let delay = 50; // 基本延遲
+      let delay = 50;
       const char = text.charAt(index);
       if (",.;!?".includes(char)) {
-        delay = 300; // 標點延長
+        delay = 300;
       }
       setTimeout(() => {
         typewriterEffect(element, text, index + 1);
@@ -195,8 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 利用 IntersectionObserver 監控問題解讀操作說明區是否進入 viewport，
-  // 當進入時，對其中每個 .typewriter-text 元素開始執行打字機效果
+  // 利用 IntersectionObserver 監控問題解讀操作說明區（postSoulInstructions）
+  // 由於我們改用 .invisible 控制 opacity（而非 display:none），故此區仍會被觀察
   const observerOptions = {
     root: null,
     threshold: 0.5
@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
           el.textContent = "";
           typewriterEffect(el, fullText);
         });
+        // 觀察一次後取消觀察
         obs.unobserve(entry.target);
       }
     });
