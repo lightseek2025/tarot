@@ -45,18 +45,62 @@ section.instructions {
   color: #5c3a21;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-section.instructions h2 {
-  margin-bottom: 10px;
-  color: #b85c38;
+
+/* 靈魂解讀操作說明動畫 */
+.soul-title {
   font-size: 24px;
-}
-section.instructions p {
+  color: #b85c38;
   margin-bottom: 10px;
-  line-height: 1.6;
+  animation: fadeIn 1s ease-out;
+}
+.soul-text {
   font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  opacity: 0; /* 初始隱藏，動畫後顯示 */
+}
+.left-slide {
+  animation: slideInLeft 1.5s forwards;
+}
+.right-slide {
+  animation: slideInRight 1.5s forwards;
 }
 
-/* 按鈕樣式 */
+/* 問題解讀操作說明淡入動畫 */
+.question-instructions .fade-in {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+/* Keyframes 動畫 */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 按鈕區 */
 .btn-container {
   margin: 20px;
 }
@@ -165,14 +209,14 @@ button:hover {
   padding: 20px;
 }
 
-/* 領域卡牌排列，每次新增一 row */
+/* 領域卡牌排列：每次新增一 row */
 .cards-row {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
 
-/* 領域區塊標題與分隔線間距調整 */
+/* 領域區塊標題與分隔線間距 */
 #questionCards h3 {
   margin: 20px 0 5px;
 }
@@ -209,7 +253,7 @@ button:hover {
   width: 40px;
   text-align: center;
 }
-/* 將左右春聯與中間祝福牌的間距調大 */
+/* 將左右春聯與中間祝福牌間距調大 */
 .couplets .left-couplet {
   margin-right: 30px;
 }
