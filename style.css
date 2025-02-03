@@ -31,24 +31,29 @@ header.header .slogan {
   line-height: 1.5;
 }
 
-/* 操作說明區（米色背景） */
+/* 操作說明區塊（溫暖風格） */
 section.instructions {
   max-width: 600px;
   margin: 20px auto;
-  background: #f9f1e7;
+  background: #fff8f0; /* 淡暖米白色 */
   border: 2px solid #d4a373;
+  border-left: 5px solid #b85c38; /* 左側色條 */
   border-radius: 10px;
-  padding: 15px;
+  padding: 20px;
   text-align: left;
+  font-family: "Georgia", serif;
+  color: #5c3a21;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 section.instructions h2 {
   margin-bottom: 10px;
   color: #b85c38;
+  font-size: 24px;
 }
 section.instructions p {
-  margin-bottom: 8px;
-  line-height: 1.4;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 16px;
 }
 
 /* 按鈕樣式 */
@@ -160,7 +165,7 @@ button:hover {
   padding: 20px;
 }
 
-/* 領域卡牌排列：每次新增一 row */
+/* 領域卡牌排列，每次新增一 row */
 .cards-row {
   display: flex;
   gap: 10px;
@@ -204,7 +209,7 @@ button:hover {
   width: 40px;
   text-align: center;
 }
-/* 調整春聯與中間祝福牌間距 */
+/* 將左右春聯與中間祝福牌的間距調大 */
 .couplets .left-couplet {
   margin-right: 30px;
 }
