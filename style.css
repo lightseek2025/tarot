@@ -82,6 +82,14 @@ button:hover {
   opacity: 0.8;
 }
 
+/* 調整領域按鈕間距 */
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 5px 0; /* 上下間距縮小 */
+}
+
 /* sticky 區塊：靈魂解讀結果 */
 .sticky-section {
   position: sticky;
@@ -99,15 +107,14 @@ button:hover {
 /* 卡片樣式 */
 .cards {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* 對於領域卡區，後續會以 row 區分 */
   gap: 10px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 .card {
   width: 100px;
   height: 150px;
   perspective: 600px;
-  margin: 0 auto;
 }
 .card-inner {
   width: 100%;
@@ -116,6 +123,7 @@ button:hover {
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
+/* 若卡片含有 .flipped，顯示背面 */
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
@@ -134,33 +142,22 @@ button:hover {
   object-fit: cover;
   border-radius: 5px;
 }
-/* 設定卡片背面樣式，置中顯示文字（您可自行換成圖片或其他設計） */
+/* 設定卡片背面樣式，顯示背面圖片 */
 .card-back {
-  background: #d4a373;
   transform: rotateY(180deg);
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: white;
+  overflow: hidden;
+}
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 /* 滾動內容區（包含問題解讀相關） */
 .scroll-content {
   padding: 20px;
-}
-
-/* 問題解讀區塊與領域按鈕 */
-#questionOptions {
-  margin: 15px auto;
-  max-width: 600px;
-}
-.btn-row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px 0;
 }
 
 /* 2025祝福牌樣式 */
@@ -180,17 +177,28 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 .couplets .left-couplet,
 .couplets .right-couplet {
-  font-size: 14px;
-  /* 調整春聯文字為亮紅 */
-  color: #ff3333;
-  margin: 0 10px;
-  width: 80px;
+  background-color: #ff3333;
+  color: white;
+  padding: 10px;
+  writing-mode: vertical-rl;  /* 垂直書寫 */
+  font-size: 16px;
+  border-radius: 5px;
+  width: 40px;
+  text-align: center;
 }
 
 /* 隱藏樣式 */
 .hidden {
   display: none;
+}
+
+/* 針對領域卡牌的排版，每次新增一 row */
+.cards-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
