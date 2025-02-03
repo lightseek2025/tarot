@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let soulUsed = [];
   let soulDrawn = false;
 
-  // 每個領域獨立的牌庫（初始為 fullDeck() 減去 soulUsed），儲存在 domainDecks 物件中
+  // 各領域獨立的牌庫（初始為 fullDeck() 減去 soulUsed），儲存在 domainDecks 物件中
   const domainDecks = {};
   // 2025 祝福牌獨立牌庫
   let blessingDeck = [];
 
-  // 回傳完整牌庫 [1,...,78]
+  // 回傳完整牌庫 [1, 2, ..., 78]
   function fullDeck() {
     return Array.from({ length: 78 }, (_, i) => i + 1);
   }
@@ -41,19 +41,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return drawn;
   }
 
-  // 初始化各領域與 2025 祝福牌的牌庫（以 fullDeck() 減去 soulUsed 為基礎，共 75 張）
+  // 初始化各領域與 2025 祝福牌的牌庫（以 fullDeck() 減去 soulUsed 為基礎）
   function initDecks() {
     const remaining = fullDeck().filter(card => !soulUsed.includes(card));
-    // 各領域獨立牌庫（感情、人際關係、學業、事業、財運）
+    console.log("初始化牌庫，剩餘牌：", remaining);
     ["感情", "人際關係", "學業", "事業", "財運"].forEach(domain => {
       domainDecks[domain] = [...remaining];
+      console.log(`領域 ${domain} 牌庫初始化完成，牌數：${domainDecks[domain].length}`);
     });
-    // 2025 祝福牌獨立牌庫
     blessingDeck = [...remaining];
+    console.log("祝福牌牌庫初始化完成，牌數：", blessingDeck.length);
   }
 
   // 建立卡片 DOM 並加入 container（用於靈魂解讀）
-  // 每張牌初始加上 "flipped" class（顯示背面）
+  // 每張牌初始加上 "flipped" class，表示以背面呈現
   function displayCards(container, cards) {
     container.innerHTML = "";
     cards.forEach(card => {
@@ -108,32 +109,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // 當按下「靈魂解讀」按鈕時
   soulReadingBtn.addEventListener("click", () => {
     if (soulDrawn) return;
-    // 從完整牌庫抽 3 張作為靈魂解讀
     soulUsed = drawCards(fullDeck(), 3);
-    // 顯示靈魂解讀區，呈現抽出的 3 張（初始皆顯示背面）
+    console.log("靈魂解讀抽出的牌：", soulUsed);
     soulSection.classList.remove("hidden");
     displayCards(soulCards, soulUsed);
-    // 隱藏初始按鈕區
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    // 顯示問題解讀操作說明與問題解讀按鈕區
     postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
-    // 初始化各領域與祝福牌的牌庫
     initDecks();
   });
 
-  // 當按下「問題解讀」按鈕時：隱藏此按鈕區，顯示領域按鈕區
+  // 當按下「問題解讀」按鈕時，隱藏該按鈕區，並顯示領域按鈕區
   questionReadingBtn.addEventListener("click", () => {
     questionOptions.classList.remove("hidden");
     questionBtnContainer.classList.add("hidden");
+    console.log("顯示領域按鈕區：", questionOptions);
   });
 
-  // 當點選領域按鈕時
+  // 為領域按鈕設置事件委派
   questionOptions.addEventListener("click", (e) => {
+    console.log("領域按鈕區點擊事件觸發，目標：", e.target);
     if (e.target.classList.contains("questionBtn")) {
       const domain = e.target.dataset.type;
-      // 如果該領域尚未建立區塊，則新增一個
+      console.log("點擊的領域：", domain);
+      // 若該領域尚未建立區塊，則建立
       if (!questionCategories[domain]) {
         const section = document.createElement("div");
         section.innerHTML = `<h3>${domain}</h3><hr>`;
@@ -141,24 +141,22 @@ document.addEventListener("DOMContentLoaded", () => {
         container.classList.add("cards");
         section.appendChild(container);
         questionCards.appendChild(section);
-        // 儲存此領域的 container 與牌庫參考
         questionCategories[domain] = { container, deck: domainDecks[domain] };
+        console.log(`建立領域區塊：${domain}`);
       }
       const { container, deck } = questionCategories[domain];
-      // 從該領域的獨立牌庫抽 3 張
       const newCards = drawCards(deck, 3);
+      console.log(`領域 ${domain} 抽出的牌：`, newCards, "剩餘牌：", deck);
       if (newCards.length < 3) {
         alert("該領域的卡牌已抽完！");
         return;
       }
       appendCards(container, newCards);
-      // 顯示 2025 祝福牌區（如果尚未顯示）
       blessingContainer.classList.remove("hidden");
     }
   });
 
   // 當按下「2025的祝福牌」按鈕時
-  // 從 blessingDeck 抽 1 張牌，直接呈現正面（不加 flipped）
   blessing2025Btn.addEventListener("click", () => {
     const drawn = drawCards(blessingDeck, 1);
     if (drawn.length < 1) {
@@ -166,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const card = drawn[0];
+    console.log("2025祝福牌抽出：", card, "剩餘牌：", blessingDeck);
     blessingCardDisplay.innerHTML = `
       <div class="card-inner">
         <div class="card-front">
