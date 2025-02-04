@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張卡
+  // 新增卡片到 container（用於領域區塊），每次新增一 row 內的 3 張牌
   function appendCards(container, cards) {
     if (cards.length < 3) {
       alert("該領域的卡牌已抽完！");
@@ -117,8 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCards(soulCards, soulUsed);
     document.querySelector(".btn-container.initial").classList.add("hidden");
     soulDrawn = true;
-    // 顯示問題解讀操作說明區（將 inline style opacity 設為 0 -> 1）
-    postSoulInstructions.style.opacity = "1";
     postSoulInstructions.classList.remove("hidden");
     questionBtnContainer.classList.remove("hidden");
     initDecks();
@@ -181,36 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
     blessingCard.classList.remove("hidden");
   });
 
-  // --- Typewriter 效果 ---
-  // 此函式逐字將 text 輸出到 element，遇標點延長延遲；完成後文字保持不變
-  function typewriterEffect(element, text, index = 0) {
-    if (index < text.length) {
-      element.innerHTML += text.charAt(index);
-      let delay = 50;
-      const char = text.charAt(index);
-      if (",.;!?".includes(char)) {
-        delay = 300;
-      }
-      setTimeout(() => {
-        typewriterEffect(element, text, index + 1);
-      }, delay);
-    }
-  }
-
-  // 利用 IntersectionObserver 監控問題解讀操作說明區（postSoulInstructions）
-  // 當進入 viewport 時，對內部所有 .typewriter-text 元素開始打字機效果
+  // --- Typewriter 效果（原打字機效果已取消，改為淡入效果） ---
+  // 這裡取消原本打字機效果的函式，改為利用 IntersectionObserver 觸發 fadeIn（以 CSS 動畫實現）
   const observerOptions = {
     root: null,
-    threshold: 0 // 只要有一點進入 viewport 就觸發
+    threshold: 0.1
   };
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const typewriterTexts = entry.target.querySelectorAll(".typewriter-text");
-        typewriterTexts.forEach(el => {
-          const fullText = el.textContent;
-          el.textContent = "";
-          typewriterEffect(el, fullText);
+        // 直接將 .static-text 內的文字淡入，透過添加 class "typewriter"（其 CSS 動畫為淡入）
+        const staticTexts = entry.target.querySelectorAll(".static-text");
+        staticTexts.forEach(el => {
+          el.classList.add("typewriter");
         });
         obs.unobserve(entry.target);
       }
