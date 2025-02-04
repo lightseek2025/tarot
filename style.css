@@ -46,7 +46,7 @@ section.instructions {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* 靈魂解讀操作說明動畫 */
+/* 靈魂解讀操作說明動畫與排版 */
 .soul-title {
   font-size: 20px;  /* 調整字型 */
   color: #b85c38;
@@ -61,24 +61,26 @@ section.instructions {
   margin-bottom: 10px;
   opacity: 0;
 }
-/* 第一行和第二行分別依序出現 */
+/* 依序彈入：先標題、再第一行、再第二行 */
 .first-line {
-  animation: slideInLeft 2.5s forwards;
+  animation: fadeIn 2s forwards;
   animation-delay: 2s;
 }
 .second-line {
-  animation: slideInRight 2.5s forwards;
-  animation-delay: 5s;
+  animation: fadeIn 2s forwards;
+  animation-delay: 4s;
 }
 
-/* 問題解讀操作說明 (取消打字機效果，改為淡入) */
+/* 問題解讀操作說明（靜態呈現，加入醒目設計） */
 .question-instructions .static-text {
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 10px;
+  padding: 10px;
+  border-left: 4px solid #b85c38;
+  background: rgba(255, 255, 255, 0.9);
   opacity: 0;
-  animation: fadeIn 3s forwards;
-  /* 延遲可根據需要調整 */
+  animation: fadeIn 2s forwards;
   animation-delay: 0.5s;
 }
 
@@ -111,12 +113,23 @@ button:hover {
   opacity: 0.8;
 }
 
-/* 領域按鈕間距縮小 */
+/* 領域按鈕間距縮小與浮現效果 */
 .btn-row {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin: 3px 0;
+  animation: fadeInUp 1s forwards;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* sticky 區塊 */
@@ -142,12 +155,29 @@ button:hover {
 #soulCards {
   display: flex;
   flex-direction: row;
+  animation: magicReveal 1s ease-out;
 }
 .card {
   width: 100px;
   height: 150px;
   perspective: 600px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  /* 當卡片首次出現，應用魔法顯現動畫 */
+  animation: magicReveal 1s ease-out;
+}
+@keyframes magicReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-15deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
 }
 .card-inner {
   width: 100%;
@@ -196,6 +226,7 @@ button:hover {
   display: flex;
   gap: 10px;
   justify-content: center;
+  animation: magicReveal 1s ease-out;
 }
 
 /* 領域區塊標題與分隔線間距調整 */
@@ -210,6 +241,7 @@ button:hover {
 .blessing-container {
   margin: 20px auto;
   max-width: 600px;
+  animation: magicReveal 1s ease-out;
 }
 .blessing-card {
   margin-top: 15px;
@@ -218,6 +250,7 @@ button:hover {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: magicReveal 1s ease-out;
 }
 .couplets {
   display: flex;
@@ -235,7 +268,6 @@ button:hover {
   width: 40px;
   text-align: center;
 }
-/* 調整春聯與中間祝福牌間距 */
 .couplets .left-couplet {
   margin-right: 30px;
 }
@@ -248,28 +280,10 @@ button:hover {
   display: none;
 }
 
-/* Keyframes for 靈魂解讀滑入動畫 */
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-150%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slideInRight {
-  from {
-    transform: translateX(150%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+/* Keyframes for 靈魂解讀淡入 */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Keyframes for 領域按鈕浮現（fadeInUp）已內建於 .btn-row 之中 */
