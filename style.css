@@ -37,7 +37,7 @@ section.instructions {
   margin: 20px auto;
   background: #fff8f0; /* 淡暖米白色 */
   border: 2px solid #d4a373;
-  border-left: 5px solid #b85c38; /* 左側色條 */
+  border-left: 5px solid #b85c38;
   border-radius: 10px;
   padding: 20px;
   text-align: left;
@@ -46,12 +46,12 @@ section.instructions {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* 靈魂解讀操作說明動畫與排版 */
+/* 靈魂解讀操作說明 */
 .soul-title {
-  font-size: 20px;  /* 調整字型 */
+  font-size: 20px;
   color: #b85c38;
   margin-bottom: 10px;
-  text-align: center; /* 置中 */
+  text-align: center;
   opacity: 0;
   animation: fadeIn 2s forwards;
 }
@@ -61,7 +61,7 @@ section.instructions {
   margin-bottom: 10px;
   opacity: 0;
 }
-/* 依序彈入：先標題、再第一行、再第二行 */
+/* 依序淡入（標題、第一行、第二行），延遲逐步增加 */
 .first-line {
   animation: fadeIn 2s forwards;
   animation-delay: 2s;
@@ -71,7 +71,7 @@ section.instructions {
   animation-delay: 4s;
 }
 
-/* 問題解讀操作說明（靜態呈現，加入醒目設計） */
+/* 問題解讀操作說明（靜態呈現，淡入效果） */
 .question-instructions .static-text {
   font-size: 14px;
   line-height: 1.5;
@@ -113,7 +113,7 @@ button:hover {
   opacity: 0.8;
 }
 
-/* 領域按鈕間距縮小與浮現效果 */
+/* 領域按鈕間距與浮現 */
 .btn-row {
   display: flex;
   justify-content: center;
@@ -162,21 +162,20 @@ button:hover {
   height: 150px;
   perspective: 600px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  /* 當卡片首次出現，應用魔法顯現動畫 */
   animation: magicReveal 1s ease-out;
 }
 @keyframes magicReveal {
   0% {
     opacity: 0;
-    transform: scale(0.5) rotate(-15deg);
+    transform: scale(0.5);
   }
   50% {
     opacity: 0.7;
-    transform: scale(1.05) rotate(5deg);
+    transform: scale(1.05);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotate(0);
+    transform: scale(1);
   }
 }
 .card-inner {
@@ -221,7 +220,7 @@ button:hover {
   padding: 20px;
 }
 
-/* 領域卡牌排列：每次新增一 row */
+/* 領域卡牌排列 */
 .cards-row {
   display: flex;
   gap: 10px;
@@ -229,7 +228,7 @@ button:hover {
   animation: magicReveal 1s ease-out;
 }
 
-/* 領域區塊標題與分隔線間距調整 */
+/* 領域區塊標題與分隔線間距 */
 #questionCards h3 {
   margin: 20px 0 5px;
 }
@@ -280,10 +279,8 @@ button:hover {
   display: none;
 }
 
-/* Keyframes for 靈魂解讀淡入 */
+/* Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-/* Keyframes for 領域按鈕浮現（fadeInUp）已內建於 .btn-row 之中 */
