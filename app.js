@@ -179,8 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     blessingCard.classList.remove("hidden");
   });
 
-  // --- 觀察問題解讀操作說明區並觸發淡入動畫 ---
-  // 由於我們改用淡入效果，此處利用 IntersectionObserver 當該區進入 viewport 時，添加 class "typewriter"
+  // --- 觀察問題解讀操作說明區，觸發淡入效果 ---
   const observerOptions = {
     root: null,
     threshold: 0.1
