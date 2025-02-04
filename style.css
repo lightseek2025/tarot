@@ -61,39 +61,25 @@ section.instructions {
   margin-bottom: 10px;
   opacity: 0;
 }
-.left-slide {
+/* 第一行和第二行分別依序出現 */
+.first-line {
   animation: slideInLeft 2.5s forwards;
+  animation-delay: 2s;
 }
-.right-slide {
+.second-line {
   animation: slideInRight 2.5s forwards;
+  animation-delay: 5s;
 }
 
-/* 問題解讀操作說明 (Typewriter 效果) */
-.question-instructions p {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 0.15em solid #5c5c5c;  /* 顯示 caret */
+/* 問題解讀操作說明 (取消打字機效果，改為淡入) */
+.question-instructions .static-text {
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 10px;
-  /* 初始不透明度設定在 HTML inline style 中 */
-}
-.typewriter-text {
-  display: inline-block;
-}
-
-/* 使用兩段動畫：先打字，再移除 caret */
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-@keyframes removeCaret {
-  from { border-right-color: #5c5c5c; }
-  to { border-right-color: transparent; }
-}
-.typewriter {
-  animation: typewriter 4s steps(40, end) forwards, removeCaret 0.5s 4s forwards;
-  opacity: 1;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+  /* 延遲可根據需要調整 */
+  animation-delay: 0.5s;
 }
 
 /* 按鈕區 */
