@@ -179,8 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
     blessingCard.classList.remove("hidden");
   });
 
-  // --- Typewriter 效果（原打字機效果已取消，改為淡入效果） ---
-  // 這裡取消原本打字機效果的函式，改為利用 IntersectionObserver 觸發 fadeIn（以 CSS 動畫實現）
+  // --- 觀察問題解讀操作說明區並觸發淡入動畫 ---
+  // 由於我們改用淡入效果，此處利用 IntersectionObserver 當該區進入 viewport 時，添加 class "typewriter"
   const observerOptions = {
     root: null,
     threshold: 0.1
@@ -188,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // 直接將 .static-text 內的文字淡入，透過添加 class "typewriter"（其 CSS 動畫為淡入）
         const staticTexts = entry.target.querySelectorAll(".static-text");
         staticTexts.forEach(el => {
           el.classList.add("typewriter");
