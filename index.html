@@ -16,8 +16,8 @@
   <!-- 靈魂解讀操作說明區 -->
   <section class="instructions soul-instructions">
     <h2 class="soul-title">這是一場你與靈魂相遇的對話</h2>
-    <p class="soul-text left-slide">學會在理性與感性之間找到平衡，讓內心與現實並肩前行</p>
-    <p class="soul-text right-slide">別害怕偶爾的失控，那或許是靈魂在提醒你——你依然炙熱地活著。勇敢追逐吧，因為那道光，本就屬於你。</p>
+    <p class="soul-text first-line">學會在理性與感性之間找到平衡，讓內心與現實並肩前行</p>
+    <p class="soul-text second-line">別害怕偶爾的失控，那或許是靈魂在提醒你——你依然炙熱地活著。勇敢追逐吧，因為那道光，本就屬於你。</p>
   </section>
 
   <div class="btn-container initial">
@@ -32,18 +32,18 @@
 
   <!-- 下方滾動內容：問題解讀區及後續操作 -->
   <div class="scroll-content">
-    <!-- 問題解讀操作說明區（初始透明度為 0，但不使用 display:none） -->
-    <div id="postSoulInstructions" class="instructions question-instructions" style="opacity:0;">
-      <p class="typewriter-text">人只要活著就時時刻刻在做取捨。做取捨那是因為你還有選擇的機會。所以只要你遵從自己的內心，怎麼選都沒錯。</p>
-      <p class="typewriter-text">別人還沒限制你。別先把自己給限制住了</p>
+    <!-- 問題解讀操作說明區：改用淡入效果，無打字機效果 -->
+    <div id="postSoulInstructions" class="instructions question-instructions hidden">
+      <p class="static-text">人只要活著就時時刻刻在做取捨。做取捨那是因為你還有選擇的機會。所以只要你遵從自己的內心，怎麼選都沒錯。</p>
+      <p class="static-text">別人還沒限制你。別先把自己給限制住了</p>
     </div>
 
-    <!-- 問題解讀按鈕區（使用 hidden 類別） -->
+    <!-- 問題解讀按鈕區（預設隱藏） -->
     <div class="btn-container hidden" id="questionBtnContainer">
       <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
     </div>
 
-    <!-- 領域按鈕區（hidden） -->
+    <!-- 領域按鈕區（預設隱藏） -->
     <div id="questionOptions" class="hidden">
       <div class="btn-row">
         <button class="questionBtn red-btn" data-type="感情">感情</button>
@@ -59,7 +59,7 @@
     <!-- 顯示各領域抽牌結果 -->
     <div id="questionCards"></div>
 
-    <!-- 2025 祝福牌區（hidden） -->
+    <!-- 2025 祝福牌區（預設隱藏） -->
     <div class="blessing-container hidden" id="blessingContainer">
       <button id="blessing2025Btn" class="styled-btn">2025的祝福牌</button>
       <div id="blessingCard" class="blessing-card hidden">
