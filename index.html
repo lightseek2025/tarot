@@ -7,66 +7,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 初始畫面：標題、Slogan 與靈魂解讀操作說明 -->
-  <header class="header">
-    <h1>尋光屋</h1>
-    <p class="slogan">「用溫暖的陪伴，陪你尋找內心的光，照亮前行的路，將療癒融入生活。」</p>
-  </header>
-
-  <!-- 靈魂解讀操作說明區 -->
-  <section class="instructions soul-instructions">
-    <h2 class="soul-title">這是一場你與靈魂相遇的對話</h2>
-    <p class="soul-text first-line">學會在理性與感性之間找到平衡，讓內心與現實並肩前行</p>
-    <p class="soul-text second-line">別害怕偶爾的失控，那或許是靈魂在提醒你——你依然炙熱地活著。勇敢追逐吧，因為那道光，本就屬於你。</p>
-  </section>
-
-  <div class="btn-container initial">
-    <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
+  <!-- Splash 畫面：全屏展示品牌資訊 -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1 class="splash-store">尋光屋</h1>
+      <p class="splash-slogan">用溫暖陪伴你尋找內心的光，照亮前行的路，將療癒融入生活</p>
+    </div>
   </div>
 
-  <!-- Sticky 區塊：靈魂解讀結果（預設隱藏） -->
-  <div id="soulSection" class="sticky-section hidden">
-    <h2>靈魂解讀</h2>
-    <div id="soulCards" class="cards"></div>
-  </div>
-
-  <!-- 下方滾動內容：問題解讀區及後續操作 -->
-  <div class="scroll-content">
-    <!-- 問題解讀操作說明區（預設隱藏），採用淡入效果 -->
-    <div id="postSoulInstructions" class="instructions question-instructions hidden">
-      <p class="static-text">人只要活著就時時刻刻在做取捨。做取捨那是因為你還有選擇的機會。所以只要你遵從自己的內心，怎麼選都沒錯。</p>
-      <p class="static-text">別人還沒限制你。別先把自己給限制住了</p>
-    </div>
-
-    <!-- 問題解讀按鈕區（預設隱藏） -->
-    <div class="btn-container hidden" id="questionBtnContainer">
-      <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
-    </div>
-
-    <!-- 領域按鈕區（預設隱藏） -->
-    <div id="questionOptions" class="hidden">
-      <div class="btn-row">
-        <button class="questionBtn red-btn" data-type="感情">感情</button>
-        <button class="questionBtn red-btn" data-type="人際關係">人際關係</button>
+  <!-- Main Content：隱藏在 splash 之下，待 splash 淡出後顯示 -->
+  <div id="mainContent" class="hidden">
+    <!-- Hero 區塊：背景圖片與靈魂解讀操作說明 -->
+    <section class="hero">
+      <div class="hero-overlay">
+        <div class="conversation">
+          <h2 class="soul-title">這是一場你與靈魂相遇的對話</h2>
+          <p class="soul-text first-line">學會在理性與感性之間找到平衡，讓內心與現實並肩前行</p>
+          <p class="soul-text second-line">別害怕偶爾的失控，那或許是靈魂在提醒你——你依然炙熱地活著。勇敢追逐吧，因為那道光，本就屬於你。</p>
+        </div>
       </div>
-      <div class="btn-row">
-        <button class="questionBtn yellow-btn" data-type="學業">學業</button>
-        <button class="questionBtn yellow-btn" data-type="事業">事業</button>
-        <button class="questionBtn yellow-btn" data-type="財運">財運</button>
-      </div>
+    </section>
+
+    <!-- 靈魂解讀按鈕 -->
+    <div class="btn-container initial">
+      <button id="soulReadingBtn" class="styled-btn">靈魂解讀</button>
     </div>
 
-    <!-- 顯示各領域抽牌結果 -->
-    <div id="questionCards"></div>
+    <!-- Sticky 區塊：靈魂解讀結果 -->
+    <div id="soulSection" class="sticky-section hidden">
+      <h2>靈魂解讀</h2>
+      <div id="soulCards" class="cards"></div>
+    </div>
 
-    <!-- 2025 祝福牌區（預設隱藏） -->
-    <div class="blessing-container hidden" id="blessingContainer">
-      <button id="blessing2025Btn" class="styled-btn">2025的祝福牌</button>
-      <div id="blessingCard" class="blessing-card hidden">
-        <div class="couplets">
-          <div class="left-couplet">解惑塔羅療心靈</div>
-          <div id="blessingCardDisplay" class="card"></div>
-          <div class="right-couplet">命運驚喜藏心裡</div>
+    <!-- 下方滾動內容：問題解讀區與後續操作 -->
+    <div class="scroll-content">
+      <!-- 問題解讀操作說明區（藝術風格） -->
+      <div id="postSoulInstructions" class="instructions question-instructions hidden">
+        <p class="static-text">人只要活著就時時刻刻在做取捨。做取捨那是因為你還有選擇的機會。所以只要你遵從自己的內心，怎麼選都沒錯。</p>
+        <p class="static-text">別人還沒限制你。別先把自己給限制住了</p>
+      </div>
+
+      <!-- 問題解讀按鈕區 -->
+      <div class="btn-container hidden" id="questionBtnContainer">
+        <button id="questionReadingBtn" class="styled-btn">問題解讀</button>
+      </div>
+
+      <!-- 領域按鈕區 -->
+      <div id="questionOptions" class="hidden">
+        <!-- 新增「健康」領域按鈕（綠色） -->
+        <div class="btn-row">
+          <button class="questionBtn green-btn" data-type="健康">健康</button>
+        </div>
+        <div class="btn-row">
+          <button class="questionBtn red-btn" data-type="感情">感情</button>
+          <button class="questionBtn red-btn" data-type="人際關係">人際關係</button>
+        </div>
+        <div class="btn-row">
+          <button class="questionBtn yellow-btn" data-type="學業">學業</button>
+          <button class="questionBtn yellow-btn" data-type="事業">事業</button>
+          <button class="questionBtn yellow-btn" data-type="財運">財運</button>
+        </div>
+      </div>
+
+      <!-- 各領域抽牌結果 -->
+      <div id="questionCards"></div>
+
+      <!-- 2025 祝福牌區 -->
+      <div class="blessing-container hidden" id="blessingContainer">
+        <button id="blessing2025Btn" class="styled-btn">2025的祝福牌</button>
+        <div id="blessingCard" class="blessing-card hidden">
+          <div class="couplets">
+            <div class="left-couplet">解惑塔羅療心靈</div>
+            <div id="blessingCardDisplay" class="card"></div>
+            <div class="right-couplet">命運驚喜藏心裡</div>
+          </div>
         </div>
       </div>
     </div>
