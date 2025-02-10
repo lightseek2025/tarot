@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function initDecks() {
     const remaining = fullDeck().filter(card => !soulUsed.includes(card));
     console.log("初始化牌庫，剩餘牌：", remaining);
-    ["感情", "人際關係", "學業", "事業", "財運"].forEach(domain => {
+    // 將 "健康" 也加入領域中
+    ["健康", "感情", "人際關係", "學業", "事業", "財運"].forEach(domain => {
       domainDecks[domain] = [...remaining];
       console.log(`領域 ${domain} 牌庫初始化完成，牌數：${domainDecks[domain].length}`);
     });
@@ -138,8 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!questionCategories[domain]) {
         const section = document.createElement("div");
         section.innerHTML = `<h3>${domain}</h3><hr>`;
+        // 將領域的牌區容器使用新的 class（垂直排列）
         const container = document.createElement("div");
-        container.classList.add("cards");
+        container.classList.add("domain-cards-container");
         section.appendChild(container);
         questionCards.appendChild(section);
         questionCategories[domain] = { container, deck: domainDecks[domain] };
@@ -179,7 +181,15 @@ document.addEventListener("DOMContentLoaded", () => {
     blessingCard.classList.remove("hidden");
   });
 
-  // --- 觀察問題解讀操作說明區，觸發淡入效果 ---
+  // --- Splash 畫面處理 ---
+  // 當 splash 動畫結束後，顯示 mainContent 並移除 splash
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("mainContent").classList.remove("hidden");
+    document.getElementById("mainContent").style.display = "block";
+  }, 4000); // 假設總共4秒
+
+  // --- 觀察問題解讀操作說明區並觸發淡入動畫 ---
   const observerOptions = {
     root: null,
     threshold: 0.1
